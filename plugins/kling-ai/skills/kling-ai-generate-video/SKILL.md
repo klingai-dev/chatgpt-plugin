@@ -5,7 +5,7 @@ description: Generate videos through the Kling AI MCP in ChatGPT. Use for text-t
 
 # Kling AI video generation
 
-Turn the request into one coherent motion plan and one remote video generation authorized by the user's explicit request. Follow the Codex OAuth, generation authorization, single-submission, status, and result rules in the [core Kling Skill](../kling-ai/SKILL.md).
+Turn the request into one coherent motion plan and one remote video generation based on the user's brief. Follow the Codex OAuth, generation authorization, single-submission, status, and result rules in the [core Kling Skill](../kling-ai/SKILL.md).
 
 Read [motion and shots](references/motion-and-shots.md) for camera direction, continuity, multi-beat timing, or reference media. Read [scene patterns](references/scene-patterns.md) for product, advertising, social, or cinematic work. For Elements, the motion library, or local media, also read the core [asset workflows](../kling-ai/references/asset-workflows.md).
 
@@ -18,7 +18,7 @@ Read [omni reference video](references/omni-video.md) before selecting a tool or
 3. Create or reuse the UUIDv7 `taskTraceId` for this objective, call `who_am_i`, and select a compatible model, duration, resolution, and live arguments.
 4. Upload local media first. Distinguish first frame, tail frame, identity or product reference, style reference, and motion source. Never silently degrade modes after an upload failure.
 5. Build a motion-first prompt covering opening composition, subject action, camera movement, environmental motion, timing, continuity, protected facts, light, materials, and necessary exclusions.
-6. Briefly state the final mode, model, prompt summary, duration, resolution, aspect ratio, output count, shot structure, and reference roles. If the user explicitly requested generation and necessary inputs are available, submit in this turn without asking for another confirmation. Ask only about unclear intent or missing necessary inputs, or honor an explicit user request to preview or wait.
+6. Prepare the final mode, model, prompt summary, duration, resolution, aspect ratio, output count, shot structure, and reference roles. When the request and required inputs are ready, briefly describe the planned result and proceed with generation. Clarify only missing intent or necessary inputs, and respect requests to preview or pause.
 7. Call the selected video or motion tool exactly once and preserve the task number. If its MCP App mounts, let that one App self-refresh and do not call `query_tasks` from the model. If no App mounts, follow the core Skill's headless polling fallback; never resubmit.
 8. When ChatGPT renders the MCP App, do not add Markdown media or duplicate links. When no App is rendered, provide one primary video link.
 

@@ -7,7 +7,6 @@ Kling AI for ChatGPT creates and queries image, video, and motion tasks through 
 - Text-to-image, image-to-image, posters, product visuals, portraits, covers, and controlled variations
 - Text-to-video, image-to-video, omni reference video (`omni_ref_video` / 全能参考), keyframes, motion control, product shorts, and storyboard planning
 - Asset uploads, Element management, motion library access, credit balance checks, and task status queries
-- Explicit generation requests authorize one submission without a redundant confirmation
 - Remote MCP App resource rendering in ChatGPT when available, with standard MCP content as the fallback
 
 ## MCP and Authorization
@@ -42,7 +41,7 @@ Complete OAuth through the connection offered by ChatGPT. Do not paste API keys,
 
 1. Call `who_am_i` before generation and use only the canonical models, parameters, enums, and inputs returned at runtime.
 2. Process local assets with the remote upload tool first. Reuse the same UUIDv7 `taskTraceId` for uploads, generation, and queries that serve the same goal.
-3. For a clear generation request, check and briefly state the final workflow, model, prompt summary, resolution or duration, aspect ratio, output count, and reference roles, then submit in the same turn without another confirmation. Ask only if intent or necessary inputs are unclear, or honor an explicit preview/wait request.
+3. Prepare the final workflow, model, prompt summary, resolution or duration, aspect ratio, output count, and reference roles. Once the request and necessary inputs are ready, briefly describe the planned result and proceed with generation. Clarify gaps and respect requests to preview or pause.
 4. Call a generation tool at most once for each explicit generation request. Do not retry automatically after a failure, timeout, or ambiguous result.
 5. After receiving a `generationId`, use only `query_tasks` to check it and present the ID to the user as the task number.
 6. When ChatGPT renders the MCP App, do not duplicate media or download links outside the App. When the App is not rendered, provide only the text fallback from the same call and one primary result link.
