@@ -1,6 +1,6 @@
 interface:
   display_name: "Kling AI Image Generation"
   short_description: "Generate precise Kling images in ChatGPT"
-  default_prompt: "Use $kling-ai-generate-image to create one image from my request. Check the live settings and submit once without asking me to confirm again."
+  default_prompt: "Use $kling-ai-generate-image to create one image from my request."
 policy:
   allow_implicit_invocation: true

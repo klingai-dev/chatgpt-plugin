@@ -55,11 +55,11 @@ Read-only account check:
 
 Image generation:
 
-> `$kling-ai-generate-image` Create a 4:5 product poster featuring a glass perfume bottle in a deep-red studio with soft rim lighting and copy-safe space in the upper-right corner. Check the live settings and submit once without asking for another confirmation.
+> `$kling-ai-generate-image` Create a 4:5 product poster featuring a glass perfume bottle in a deep-red studio with soft rim lighting and copy-safe space in the upper-right corner.
 
 Video generation:
 
-> `$kling-ai-generate-video` Create a continuous 5-second, 16:9 shot: outside a convenience store on a rainy night, a vintage motorcycle slowly stops as the camera smoothly pushes in. Check the live settings and submit once without asking for another confirmation.
+> `$kling-ai-generate-video` Create a continuous 5-second, 16:9 shot: outside a convenience store on a rainy night, a vintage motorcycle slowly stops as the camera smoothly pushes in.
 
 Task query:
 
