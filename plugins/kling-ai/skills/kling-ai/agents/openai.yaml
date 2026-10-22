@@ -1,0 +1,6 @@
+interface:
+  display_name: "Kling AI"
+  short_description: "Create and manage Kling images and videos"
+  default_prompt: "Use $kling-ai to create a Kling image or video from my request."
+policy:
+  allow_implicit_invocation: true
