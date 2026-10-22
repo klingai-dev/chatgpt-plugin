@@ -1,0 +1,47 @@
+{
+  "name": "kling-ai",
+  "version": "1.0.0",
+  "description": "Create and manage Kling AI image, video, motion, and reusable Element workflows through an OAuth-protected remote MCP server.",
+  "author": {
+    "name": "KLING AI",
+    "url": "https://klingai.com"
+  },
+  "homepage": "https://klingai.com/app",
+  "license": "MIT",
+  "keywords": [
+    "kling",
+    "kling-ai",
+    "video-generation",
+    "text-to-video",
+    "image-to-video",
+    "mcp",
+    "ChatGPT"
+  ],
+  "mcpServers": "./.mcp.json",
+  "interface": {
+    "displayName": "Kling AI",
+    "shortDescription": "Create with Kling AI",
+    "longDescription": "Create images and videos from text or reference media, use motion control and reusable Elements, upload source assets, check credits, and track tasks. OAuth is managed by the host, and every credit-consuming generation requires explicit confirmation before one submission.",
+    "developerName": "KLING AI",
+    "category": "Creativity",
+    "capabilities": [
+      "Interactive",
+      "Read",
+      "Write"
+    ],
+    "websiteURL": "https://kling.ai/",
+    "privacyPolicyURL": "https://kling.ai/docs/privacy-policy",
+    "termsOfServiceURL": "https://kling.ai/docs/user-policy",
+    "defaultPrompt": [
+      "Draw a red panda in a vintage spacesuit floating by a space station window, lit by Earth’s blue glow, cinematic and detailed",
+      "Create a 5-second cinematic video: a mecha warrior crashes down, blasting rocks and dust as the camera rapidly pushes in",
+      "Create a 15-second sneaker ad: street hook, product close-ups and on-foot action, ending on a detailed hero shot"
+    ],
+    "brandColor": "#000000",
+    "composerIcon": "./assets/kling-logo.svg",
+    "logo": "./assets/kling-logo.svg",
+    "logoDark": "./assets/kling-logo.svg",
+    "supportURL": "https://kling.ai/quickstart/user",
+    "composerIconDark": "./assets/kling-logo.svg"
+  }
+}

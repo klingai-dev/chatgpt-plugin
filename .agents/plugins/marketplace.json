@@ -1,0 +1,20 @@
+{
+  "name": "kling-ai",
+  "interface": {
+    "displayName": "Kling AI"
+  },
+  "plugins": [
+    {
+      "name": "kling-ai",
+      "source": {
+        "source": "local",
+        "path": "./plugins/kling-ai"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Creativity"
+    }
+  ]
+}

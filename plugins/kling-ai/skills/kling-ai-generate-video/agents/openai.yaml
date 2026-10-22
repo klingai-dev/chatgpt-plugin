@@ -1,0 +1,6 @@
+interface:
+  display_name: "Kling AI Video Generation"
+  short_description: "Turn text and reference media into Kling AI videos"
+  default_prompt: "Use $kling-ai-generate-video to create a video. Show me the final prompt, model, duration, and settings, and wait for my confirmation before generating."
+policy:
+  allow_implicit_invocation: true
