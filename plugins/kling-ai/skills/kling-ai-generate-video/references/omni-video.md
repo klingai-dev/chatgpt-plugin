@@ -12,4 +12,4 @@ Use `omni_ref_video` as the default discovery entry point for ordinary video gen
 
 ## Submission
 
-Follow the core billing confirmation and single-submission rules, including any live tool requirement to explain reference-video billing. Do not invent prices. Preserve `generationId`, use the shared status workflow, and let the MCP App own result rendering when mounted. Missing tools, failed discovery, or unsupported references do not authorize automatic fallback or another generation.
+Follow the core generation authorization and single-submission rules, including any live tool requirement to explain reference-video billing. Do not invent prices. Preserve `generationId`, use the shared status workflow, and let the MCP App own result rendering when mounted. Missing tools, failed discovery, or unsupported references do not authorize automatic fallback or another generation.

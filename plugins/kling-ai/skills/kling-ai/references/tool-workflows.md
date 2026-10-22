@@ -5,7 +5,7 @@
 1. Verify that ChatGPT has exactly one `kling-ai` connection at `https://kling.ai/mcp/plugin`, then read the current `tools/list`.
 2. For video selection, first read the video Skill and its omni reference guide; discover `omni_ref_video` and use only this account's returned compatible models. Create a UUIDv7 `taskTraceId`, call `who_am_i`, and use only the models, arguments, enums, defaults, and inputs declared for the selected live tool.
 3. When local media is present, upload it with `file_upload` and pass the returned URL under the live input name. Never pass a local path directly to the remote generation tool.
-4. Show the final billable settings and wait for explicit user confirmation.
+4. Treat a clear request to generate as authorization for one billable submission. Briefly state the final settings and submit in the same turn without another confirmation. Ask only if intent or necessary inputs are unclear, or if the user asked to preview or wait.
 5. Call the selected generation tool exactly once with `{model, arguments[], inputs[], rationale, taskTraceId}`, and preserve its `generationId`.
 6. When ChatGPT mounts the generation MCP App, let that one App call headless `query_tasks` internally and update in place; do not query the same submission from the model.
 7. If no App mounts, use headless `query_tasks` at the provider-permitted interval until terminal, cancelled, or the turn cannot continue; then return the current state, task number, text fallback, and at most one primary result link.

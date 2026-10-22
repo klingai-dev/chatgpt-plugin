@@ -21,7 +21,7 @@
   "interface": {
     "displayName": "Kling AI",
     "shortDescription": "Create with Kling AI",
-    "longDescription": "Create images and videos from text or reference media, use motion control and reusable Elements, upload source assets, check credits, and track tasks. OAuth is managed by the host, and every credit-consuming generation requires explicit confirmation before one submission.",
+    "longDescription": "Create images and videos from text or reference media, use motion control and reusable Elements, upload source assets, check credits, and track tasks. OAuth is managed by the host, and a clear generation request authorizes one submission without another confirmation; failed submissions are never retried automatically.",
     "developerName": "KLING AI",
     "category": "Creativity",
     "capabilities": [

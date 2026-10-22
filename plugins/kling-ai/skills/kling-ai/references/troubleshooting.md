@@ -27,7 +27,7 @@ When the generation MCP App is mounted, let that App refresh the task internally
 
 ## Submission timeout or lost response
 
-Do not call the generation tool again. If a `generationId` is known, query it once. Otherwise report that creation state is unknown; the current MCP cannot list account history or recover a task by `taskTraceId`. Obtain fresh confirmation before any new submission.
+Do not call the generation tool again. If a `generationId` is known, query it once. Otherwise report that creation state is unknown; the current MCP cannot list account history or recover a task by `taskTraceId`. Stop and wait for a new explicit user request to retry before any new submission. Do not treat the original request as authorization to retry.
 
 ## Result URL expired
 
