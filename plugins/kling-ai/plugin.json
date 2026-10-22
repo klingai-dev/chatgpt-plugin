@@ -36,8 +36,8 @@
         "termsOfServiceURL": "https://kling.ai/docs/user-policy",
         "defaultPrompt": [
           "Draw a red panda in a vintage spacesuit floating by a space station window, lit by Earth’s blue glow, cinematic and detailed",
-          "Use Kling 4.0 to generate a 5‑second cinematic video: a mech warrior slams down from height onto the ground, sending out a shockwave that instantly blasts apart rubble and dust, with the camera rapidly pushing in for a powerful impact.",
-          "Use Kling 4.0 to produce a 15‑second sport shoe marketing clip: open with an urban street scene to grab attention, cut to a product close‑up and dynamic wearing shots within three seconds, and end with a detailed close‑up of the shoe's upper."
+          "Use Kling 4.0 to create a 5-second cinematic video: a mecha crashes down, blasting rubble as the camera rushes in.",
+          "Use Kling 4.0 to create a 15-second sneaker ad: street action, product close-ups, and a detailed final hero shot."
         ],
         "brandColor": "#000000",
         "composerIcon": "./assets/kling-logo.svg",
