@@ -1,11 +1,11 @@
 ---
 name: kling-ai
-description: Create, query, and manage Kling AI image and video tasks through the OAuth-protected MCP in ChatGPT. Use for text-to-image, image-to-image, text-to-video, image-to-video, omni reference video, keyframes, motion control, uploads, Elements, credit checks, task status, and account switching.
+description: Create, query, and manage Kling AI image and video tasks through the OAuth-protected MCP in Codex. Use for text-to-image, image-to-image, text-to-video, image-to-video, omni reference video, keyframes, motion control, uploads, Elements, credit checks, task status, and account switching.
 ---
 
-# Kling AI for ChatGPT
+# Kling AI for Codex
 
-Use only the remote Global MCP configured by this ChatGPT plugin: `https://kling.ai/mcp/plugin`. Do not switch regions, register a second Kling MCP, or start or depend on a local MCP server.
+Use only the remote Global MCP configured by this Codex plugin: `https://kling.ai/mcp/plugin`. Do not switch regions, register a second Kling MCP, or start or depend on a local MCP server.
 
 ## Request routing
 
@@ -16,11 +16,11 @@ Use only the remote Global MCP configured by this ChatGPT plugin: `https://kling
 
 An attachment does not determine its role. When the user has not specified one, ask only which materially relevant role it serves: first frame, tail frame, identity or product reference, editable source, motion source, or style reference.
 
-## ChatGPT connection boundary
+## Codex connection boundary
 
-- Use OAuth managed by the ChatGPT MCP connection. Never request an API key, token, cookie, authorization header, or credential file. Never log private account fields or signed URLs.
-- OAuth dynamic client registration uses `client_name: "Plugin-ChatGPT"`. This is OAuth metadata, not a tool argument, URL parameter, or secret. If the host cannot inject it, stop before authorization and report the limitation.
-- `.mcp.json` is the only MCP configuration source of truth and must remain pointed at `https://kling.ai/mcp/plugin`. Do not create a second Kling configuration or regional-switching flow.
+- Use OAuth managed by the Codex MCP connection. Never request an API key, token, cookie, authorization header, or credential file. Never log private account fields or signed URLs.
+- OAuth dynamic client registration uses `client_name: "Plugin-Codex"`. This is OAuth metadata, not a tool argument, URL parameter, or secret. If the host cannot inject it, stop before authorization and report the limitation.
+- The native `.mcp.json` and portable `mcp.json` must both retain the same single Global endpoint, `https://kling.ai/mcp/plugin`. Let Codex load the appropriate package entry; do not register a second standalone Kling server or add a regional-switching flow.
 - Create one RFC 4122 UUIDv7 `taskTraceId` for each unrelated new objective. Reuse it across discovery, upload, generation, and querying for the same objective. Present `generationId` to the user as the task number; do not expose `taskTraceId` unless troubleshooting requires it.
 
 ## Model discovery
@@ -51,7 +51,7 @@ Read [tool workflows](references/tool-workflows.md), the [MCP contract](referenc
 7. If ChatGPT mounts the generation MCP App, that App is the sole refresh owner and calls headless `query_tasks` internally; do not poll the same task from the model. If no App mounts, poll with headless `query_tasks` at the provider-permitted interval until terminal, cancelled, or the turn cannot continue.
 8. For a direct request about an existing task, call `query_tasks` once and report the current state. Do not start a new generation or long-running polling loop.
 9. When ChatGPT renders an MCP App resource returned by Kling, treat the App as the only media preview. Do not add Markdown image/video syntax, a separate media attachment, a thumbnail, or a duplicate download link outside the App. Only when no App is rendered may you return the same call's text fallback and one primary result link.
-10. Call `element_delete`, `logout`, or account switching only when the user explicitly requests the state change. Account switching stays on the same Global endpoint. When logout requires sign-in again, immediately use the native ChatGPT OAuth flow and call no other Kling tool until authorization completes.
+10. Call `element_delete`, `logout`, or account switching only when the user explicitly requests the state change. Account switching stays on the same Global endpoint. When logout requires sign-in again, immediately use the native Codex OAuth flow and call no other Kling tool until authorization completes.
 
 ## Quality defaults
 
@@ -64,9 +64,15 @@ Apply these defaults only when the user did not specify another choice and the l
 - Duration: use about 5 seconds for one action or shot, about 10 seconds for dialogue, a complete product action, or two connected beats, and longer only when supported and narratively necessary.
 - Aspect ratio: use `9:16` for vertical shorts, `1:1` for square feeds, and `16:9` for landscape ads or web. For image-to-video, preserve the first frame unless the live tool requires an explicit ratio.
 
+## Native connection and authorization
+
+- Discover the plugin's `who_am_i` before creation and use it for a read-only connection check. If it succeeds, continue with the existing authorization; do not ask the user to sign in again.
+- If the native MCP reports an authorization error, guide the user through the Codex-managed OAuth connection for `kling-ai`, then repeat only `who_am_i`. Never submit a generation to test authorization.
+- If Kling tools are absent, report a plugin loading problem. Signing in cannot repair a configuration that Codex did not load. Do not bind a QA App, add another server, copy credentials, or claim that an unrelated connection validates this plugin.
+
 ## Failure behavior
 
-- Unauthorized: use the native ChatGPT MCP connection or `codex mcp login kling-ai --scopes generation.create,generation.read,account.credit.read`, then continue only after authorization succeeds.
+- Unauthorized: use the native Codex MCP connection or `codex mcp login kling-ai --scopes generation.create,generation.read,account.credit.read`, then continue only after authorization succeeds.
 - Unsupported argument: refresh the live tool definitions and change only the rejected field. Show the revised settings and obtain confirmation again before any new generation.
 - Insufficient credits or provider failure: report the provider message and task number, then stop. Do not retry automatically.
 - Expired result URL: query the original task number for a fresh URL; do not create a new task.

@@ -3,19 +3,7 @@
   "mcpServers": {
     "kling-ai": {
       "type": "streamable-http",
-      "url": "https://kling.ai/mcp/plugin",
-      "extensions": {
-        "com.openai": {
-          "auth": {
-            "type": "oauth",
-            "baseScopes": [
-              "generation.create",
-              "generation.read",
-              "account.credit.read"
-            ]
-          }
-        }
-      }
+      "url": "https://kling.ai/mcp/plugin"
     }
   }
 }

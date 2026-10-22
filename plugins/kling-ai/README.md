@@ -73,3 +73,17 @@ This checks package structure, manifests, the single Global endpoint, local refe
 ## License
 
 MIT. Kling AI and related marks are the property of their respective owners.
+
+## Native MCP compatibility and authorization
+
+The portable entry uses `plugin.json` and `mcp.json`; the native compatibility entry uses `.codex-plugin/plugin.json` and `.mcp.json`. Both select the same Global server. No ChatGPT QA App binding is required.
+
+The current desktop transport parser rejects server-level `extensions` in `mcp.json` with `unknown field extensions, expected url or headers`. Keep this portable server configuration limited to the supported transport fields. OAuth remains managed by Codex; native requested scopes remain in `.mcp.json`.
+
+Before generation, the Skill checks `who_am_i`. An authenticated response reuses the current authorization. An authorization error calls for the native OAuth connection flow, followed by another read-only check. Missing tools require checking plugin loading before asking the user to log in.
+
+Run the regression checks from the repository root:
+
+```bash
+python3 -m unittest discover -s tests -p test_codex_mcp_compatibility.py
+```
