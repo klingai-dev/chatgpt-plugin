@@ -34,8 +34,8 @@
     "termsOfServiceURL": "https://kling.ai/docs/user-policy",
     "defaultPrompt": [
       "Draw a red panda in a vintage spacesuit floating by a space station window, lit by Earth’s blue glow, cinematic and detailed",
-      "Create a 5-second cinematic video: a mecha warrior crashes down, blasting rocks and dust as the camera rapidly pushes in",
-      "Create a 15-second sneaker ad: street hook, product close-ups and on-foot action, ending on a detailed hero shot"
+      "Use Kling 4.0 to create a 5-second cinematic video: a mecha crashes down, blasting rubble as the camera rushes in.",
+      "Use Kling 4.0 to create a 15-second sneaker ad: street action, product close-ups, and a detailed final hero shot."
     ],
     "brandColor": "#000000",
     "composerIcon": "./assets/kling-logo.svg",
