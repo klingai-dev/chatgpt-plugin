@@ -1,0 +1,10 @@
+{
+  "name": "kling-ai",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Generate and edit images, create videos from text and reference media, and check your Kling AI credits and generation progress.",
+  "engines": {
+    "node": ">=20"
+  }
+}

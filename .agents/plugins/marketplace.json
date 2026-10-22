@@ -8,7 +8,7 @@
       "name": "kling-ai",
       "source": {
         "source": "local",
-        "path": "./plugins/kling-ai"
+        "path": "./plugins/Kling AI"
       },
       "policy": {
         "installation": "AVAILABLE",

@@ -17,7 +17,7 @@ Use this reference for library operations and media preparation. The live `tools
 3. Use an Element only when both the tool and selected model explicitly support `elements` and its resource type, including compatible `omni_ref_video` models. Text-to-image and text-to-video do not use Elements. A video Element is not an image substitute.
 4. Bind the exact Element ID in both places: include `<<<ELEMENT_ID>>>` in the prompt where the subject is referenced and pass `elements` as the model-declared argument, with a JSON-array string such as `[{"id":"ELEMENT_ID","bindName":"subject"}]`. Do not use a placeholder, omit the structured binding, or invent a different field shape.
 5. An Element does not replace required image inputs. Supply `image_1`, `first_image`, or another exact live input when the selected model requires it. For motion control, the subject `image` remains required.
-6. After resolving the Element, hand the request to the image or video generation skill and follow its generation authorization, credit, single-submission, and status rules.
+6. After resolving the Element, follow the Kling AI skill's [image generation](../SKILL.md#image-generation) or [video generation](../SKILL.md#video-generation) guidance and shared authorization, credit, single-submission, and status rules.
 
 ## Motion library and motion control
 
@@ -26,11 +26,11 @@ Use this reference for library operations and media preparation. The live `tools
 - The current tool surface provides no motion create, update, or delete operation. Do not use `element_*` tools to manage motions.
 - For motion control, pass the subject image as the live `image` input. Use exactly one motion source: the library ID as the `motionId` argument or a source video as the live `video` input. Never pass a preview URL as `motionId`, and do not pass both sources.
 - Call `who_am_i` for the selected `motion_control` model and use only its declared `motionDirection`, `resolution`, and `keepOriginalSound` names and values. When `motionDirection=image_direction`, the motion source must satisfy the live 3–10 second constraint; do not pass the library duration as an undeclared `duration` argument.
-- Forward the resolved request to the video generation skill. Credit checks, explicit generation intent, one submission, and querying by `generationId` still apply.
+- Continue with the Kling AI skill's [video generation](../SKILL.md#video-generation) guidance. Credit checks, explicit generation intent, one submission, and querying by `generationId` still apply.
 
 ## Local media uploads
 
-- Prefer media already attached by ChatGPT and accepted by the selected model. If a public URL is accepted by the live tool, use it directly; do not download it unnecessarily. A historical Kling result must be refreshed by `generationId` immediately before reuse, never reused from an old URL in conversation history.
+- Prefer media already attached in the current host and accepted by the selected model. If a public URL is accepted by the live tool, use it directly; do not download it unnecessarily. A historical Kling AI result must be refreshed by `generationId` immediately before reuse, never reused from an old URL in conversation history.
 - If no usable attachment reference exists and the live MCP exposes `file_upload`, request an upload ticket with the real filename, MIME type, byte size, and the same `taskTraceId`. Never send a local path as a remote URL.
 - Complete the provider's second upload step with the returned ticket and upload URL using multipart form data containing `ticket` and the binary `file`. A ticket response is not upload completion; use the media URL only after the upload service confirms success.
 - Tickets are single-use and expire at the provider-declared `expireAt`. Never log or display tickets, signed upload URLs, credentials, cookies, or authorization headers.

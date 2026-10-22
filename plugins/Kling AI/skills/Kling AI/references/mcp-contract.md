@@ -1,4 +1,4 @@
-# Kling MCP input and output contract
+# Kling AI MCP input and output contract
 
 This reference records only stable tool-level constraints. Always take models, defaults, enums, required fields, item limits, and media inputs from the current `tools/list` and `who_am_i` response.
 

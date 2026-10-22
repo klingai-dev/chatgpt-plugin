@@ -5,7 +5,7 @@ Choose one primary pattern. Combine patterns only when duration and the live mod
 ## Continuous shots and image-to-video
 
 - A continuous shot defines opening composition, subject action, camera path, environmental motion, and ending beat. Use one primary camera movement at a time.
-- In image-to-video, treat the first frame as locked composition rather than a broad style reference. Describe plausible subject, fabric, hair, environmental, and camera motion.
+- When an image is supplied as the start frame, use it as the opening composition. Describe plausible subject, fabric, hair, environmental, and camera motion. Keep style-reference images separate from start-frame inputs.
 - In a short clip, avoid combining large subject motion, aggressive camera movement, and a major scene transformation.
 
 ## Product and advertising
@@ -14,7 +14,7 @@ Choose one primary pattern. Combine patterns only when duration and the live mod
 - Feature demonstration: one real function or action per shot, with credible mechanics and hand interaction.
 - Lifestyle: show usage context through action without unsupported claims.
 - Unboxing: establish sealed product, opening, reveal, and detail in sequence; use multiple shots only when requested.
-- Commercial: organize a hook, product evidence, and hero close-up. Prefer deterministic post-production for slogans and end cards.
+- Commercial: establish the idea, show the product in use, and finish with a clear product shot. Prefer adding slogans and end cards in post-production for reliable spelling and placement.
 
 ## Social, explainer, and narrative
 
@@ -25,4 +25,4 @@ Choose one primary pattern. Combine patterns only when duration and the live mod
 - `1:1` or portrait feed: use medium framing, a clean silhouette, and restrained lateral motion.
 - `16:9` landscape: emphasize spatial orientation, entrances or reveals, and deliberate negative space.
 
-When the user asks for ideas, offer three directions - demonstration, emotion, and spectacle - and wait for a choice. Discussing three directions does not approve three generation tasks.
+When the user asks only for ideas, offer distinct directions such as a product demonstration, a character moment, or a dramatic reveal without starting generation. If the user also asks you to choose a direction and generate it, proceed within that request. Discussing several ideas does not authorize several generation tasks.

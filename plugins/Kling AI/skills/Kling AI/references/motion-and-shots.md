@@ -9,7 +9,7 @@
 5. Environmental movement and physical effects.
 6. Lighting, color, lens character, and time-of-day mood.
 7. Continuity anchors such as identity, wardrobe, product structure, logo, architecture, and screen direction.
-8. Necessary constraints such as no extra subjects, deformation, text, or watermark.
+8. Necessary constraints, such as avoiding extra subjects, distorted shapes, or unwanted text.
 
 ## Camera choices
 
@@ -34,10 +34,10 @@ For multiple shots, give each shot a duration, framing, one narrative task, subj
 
 ## Reference media
 
-- A first frame locks the opening composition and motion starts from it.
-- A tail frame defines the target ending only when the live model supports it.
-- An identity reference locks face, apparent age, hair, wardrobe, proportions, and distinguishing traits.
-- A product reference locks dimensions, material, label, logo placement, and moving parts.
-- A motion-source video should preferably contain one shot, no occlusion, and one subject. Follow the live tool's exact duration and resolution limits.
+- A start frame supplies the opening image for the video.
+- An end frame guides the ending when the selected model supports it.
+- Use an identity reference to preserve facial features, apparent age, hair, wardrobe, proportions, and distinguishing features.
+- Use a product reference to preserve dimensions, materials, labels, logo placement, and moving parts.
+- A motion-reference video should preferably show one subject clearly in a single shot. Follow the tool's current duration and resolution limits.
 
 For advertising or explainer video, assign one communication task to each beat: hook, context, evidence, or close. Never invent performance claims, testimonials, statistics, prices, awards, or certifications.

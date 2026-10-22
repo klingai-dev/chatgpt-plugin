@@ -9,7 +9,7 @@
 5. Composition: aspect ratio, framing, camera height, focal hierarchy, negative space, and safe areas.
 6. Lighting and color.
 7. Materials, textures, surface detail, and degree of realism.
-8. Constraints: subject count, locked facts, no extra text, and no watermark.
+8. Constraints: subject count, details to preserve, and any text or elements the user wants excluded.
 
 Translate abstract requests such as "premium," "cinematic," or "high quality" into visible lighting, depth of field, material, color, and composition decisions instead of stacking adjectives.
 
@@ -25,6 +25,6 @@ Assign roles before writing the creative prompt. Identity, product structure, co
 
 ## Controlled variants
 
-Keep protected facts identical and change only one dimension at a time: concept, camera distance, composition, mood, color, or expression and action. Do not replace a clear creative decision with a batch of near-duplicates.
+Apply all requested changes and preserve the other details. For comparisons designed to isolate one feature, vary only that feature: concept, framing, composition, mood, color, expression, or action. Do not replace a clear creative request with a batch of near-duplicates.
 
 Avoid conflicting camera instructions, long repetitive negative lists, and unverified product or brand claims.
