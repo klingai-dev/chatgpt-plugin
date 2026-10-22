@@ -18,6 +18,7 @@
     "ChatGPT"
   ],
   "mcpServers": "./.mcp.json",
+  "apps": "./.app.json",
   "interface": {
     "displayName": "Kling AI",
     "shortDescription": "Create with Kling AI",
