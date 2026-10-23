@@ -2,7 +2,7 @@
 
 ## Generation
 
-1. Follow the core skill's [connect and verify](../SKILL.md#first-step-connect-and-verify) flow. Use the current host's existing Kling AI connection at `https://klingai.com/mcp`, then read the current `tools/list`.
+1. Follow the core skill's [connect and verify](../SKILL.md#first-step-connect-and-verify) flow. Use the current host's existing Kling AI connection at `https://klingai.com/mcp/plugin`, then read the current `tools/list`.
 2. For video requests, first read [video generation](../SKILL.md#video-generation) and the [Omni-Ref guide](omni-video.md); discover `omni_ref_video` and use only compatible models returned for the account. Create a UUIDv7 `taskTraceId`, call `who_am_i`, and use only the models, arguments, enums, defaults, and inputs declared for the selected tool.
 3. When local media is present, upload it with `file_upload` and pass the returned URL under the live input name. Never pass a local path directly to the remote generation tool.
 4. Prepare the final settings and briefly describe the planned result. Proceed when the request and required inputs are ready; clarify gaps and respect requests to preview or pause.

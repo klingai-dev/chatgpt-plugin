@@ -29,6 +29,6 @@ See [plugin usage and capabilities](<plugins/Kling AI/README.md>).
 
 ## Development
 
-This repository contains plugin manifests, MCP connection settings, skills, and icons. The remote service at `https://klingai.com/mcp` provides the generation tools; no local server or build is required.
+This repository contains plugin manifests, MCP connection settings, skills, and icons. The remote service at `https://klingai.com/mcp/plugin` provides the generation tools; no local server or build is required.
 
 After editing, check JSON/YAML syntax, matching metadata in both manifests, skill references, and asset paths. No validation script or automated test suite is bundled. Test account authorization in the app where the plugin will be used; static checks cannot verify it.
