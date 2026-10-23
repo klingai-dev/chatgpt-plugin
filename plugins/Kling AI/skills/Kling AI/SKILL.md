@@ -5,7 +5,7 @@ description: Generate and edit images, create videos, and check generation progr
 
 # Kling AI
 
-Use the remote MCP server bundled with this plugin: `https://kling.ai/mcp/plugin`. This is the global endpoint. Keep the same endpoint for account switching; do not register a duplicate server or require a local MCP server.
+Use the remote MCP server bundled with this plugin: `https://klingai.com/mcp`. This is the China endpoint. Keep the same endpoint for account switching; do not register a duplicate server or require a local MCP server.
 
 ## First step: connect and verify
 
@@ -32,7 +32,7 @@ Identify each attachment's role from the request: start frame, end frame, identi
 
 - Use OAuth managed by the current host's plugin connection. Never request an API key, token, cookie, authorization header, or credential file. Never log private account fields or signed URLs.
 - The host manages OAuth client registration and its metadata. Do not require the model or user to inject `client_name`, edit OAuth requests, or supply a client secret before starting the native sign-in flow. Report an actual registration failure through [troubleshooting](references/troubleshooting.md).
-- The native `.mcp.json` and portable `mcp.json` must both retain the same single global endpoint, `https://kling.ai/mcp/plugin`. Let the host load the appropriate package entry; do not register a second standalone Kling AI server or add a region-switching flow.
+- The native `.mcp.json` and portable `mcp.json` must both retain the same single China endpoint, `https://klingai.com/mcp`. Let the host load the appropriate package entry; do not register a second standalone Kling AI server or add a region-switching flow.
 - Create one UUIDv7 `taskTraceId` for each unrelated new objective. Reuse it across discovery, upload, generation, and querying for the same objective. Present `generationId` to the user as the task ID; do not expose `taskTraceId` unless troubleshooting requires it.
 
 ## Model discovery
@@ -63,7 +63,7 @@ Read [tool workflows](references/tool-workflows.md), the [MCP contract](referenc
 7. If the host displays an MCP App for the generation, let it refresh progress; do not poll the same task from the model. Otherwise, use `query_tasks` at the provider-permitted interval until the task finishes, fails, is cancelled, or the turn cannot continue. If a later response displays the App, stop polling from the model.
 8. For a direct request about an existing task, call `query_tasks` once and report the current state. Do not start a new generation or long-running polling loop.
 9. When the host displays the Kling AI MCP App, use it as the media preview and avoid duplicate media or download links outside it. When no App is displayed, use the tool's text response and provide one primary media link for each requested output.
-10. Call `element_delete` or `logout` only when the user explicitly requests deletion, sign-out, or account switching. Account switching stays on the same global endpoint. When switching accounts, start the current host's native OAuth flow after successful logout. For sign-out alone, remain signed out.
+10. Call `element_delete` or `logout` only when the user explicitly requests deletion, sign-out, or account switching. Account switching stays on the same China endpoint. When switching accounts, start the current host's native OAuth flow after successful logout. For sign-out alone, remain signed out.
 
 ## Quality defaults
 

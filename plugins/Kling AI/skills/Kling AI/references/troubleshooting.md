@@ -20,14 +20,14 @@ codex mcp login <server-name> \
 
 `<server-name>` is a placeholder for the exact name discovered on that host. If the CLI does not expose the plugin server or says it is unknown, return to the plugin's connection controls. Do not register a second standalone MCP server to make the command work.
 
-Do not substitute an API key, manually pasted token, custom callback, or an unrelated Kling AI connection. Account switching uses the same global endpoint: after successful logout, connect the intended account through the current host's native OAuth flow. If the user asked only to sign out, remain signed out. The host manages OAuth client metadata; do not ask the user to inject `client_name`. If registration or consent fails, report the error without credentials or signed URLs and explain the next supported connection step.
+Do not substitute an API key, manually pasted token, custom callback, or an unrelated Kling AI connection. Account switching uses the same China endpoint: after successful logout, connect the intended account through the current host's native OAuth flow. If the user asked only to sign out, remain signed out. The host manages OAuth client metadata; do not ask the user to inject `client_name`. If registration or consent fails, report the error without credentials or signed URLs and explain the next supported connection step.
 
 ## MCP tools are missing
 
 - Use the host's tool-discovery mechanism before concluding that a tool is absent. Skills can be loaded before their connection's tools are available.
 - Check whether Kling AI is installed, enabled, and connected. If it is disconnected or authorization is pending, follow the connection steps above. Do not infer authorization state from an empty tool list.
 - If the plugin is enabled and connected, refresh or reopen the current host and start a new chat only if needed to reload its tools. Reopen Codex for a Codex issue; reopen ChatGPT for a ChatGPT issue.
-- If tools remain missing, report a plugin loading or connection problem and the observed non-sensitive error. Keep the same global endpoint, `https://kling.ai/mcp/plugin`; do not switch regions, attach an unrelated app, edit credentials, or register another server.
+- If tools remain missing, report a plugin loading or connection problem and the observed non-sensitive error. Keep the same China endpoint, `https://klingai.com/mcp`; do not switch regions, attach an unrelated app, edit credentials, or register another server.
 - A CLI server list is a diagnostic aid, not proof that a plugin connection works. A successful authenticated `who_am_i` response is the connection check.
 
 ## Upload failure

@@ -50,7 +50,7 @@ Task query:
 
 ## Connection details for maintainers
 
-The portable entry uses `plugin.json` and `mcp.json`; the Codex compatibility entry uses `.codex-plugin/plugin.json` and `.mcp.json`. Both use the same global endpoint, `https://kling.ai/mcp/plugin`, with the server key `kling-ai`. The current app manages OAuth. The native configuration requests these scopes:
+The portable entry uses `plugin.json` and `mcp.json`; the Codex compatibility entry uses `.codex-plugin/plugin.json` and `.mcp.json`. Both use the same China endpoint, `https://klingai.com/mcp`, with the server key `kling-ai`. The current app manages OAuth. The native configuration requests these scopes:
 
 ```text
 generation.create
