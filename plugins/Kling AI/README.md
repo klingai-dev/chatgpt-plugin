@@ -16,11 +16,11 @@ Generate images, edit reference images, and create videos with Kling AI in ChatG
 3. Ask the assistant to check the connection and credit balance without generating anything. It should verify the connection before checking your credits.
 4. After the check succeeds, continue your original request. If a new chat is required to load the tools, the assistant should explain why and provide the request to copy into it.
 
-Installing the plugin or selecting a skill does not connect your Kling AI account. Keep passwords and other credentials on the sign-in page; do not paste them into chat. For missing tools, expired authorization, or failed sign-in, follow [connection troubleshooting](<skills/Kling AI/references/troubleshooting.md>).
+Installing the plugin or selecting a skill does not connect your Kling AI account. Keep passwords and other credentials on the sign-in page; do not paste them into chat. For missing tools, expired authorization, or failed sign-in, follow [connection troubleshooting](<skills/kling-ai/references/troubleshooting.md>).
 
 ## Skill
 
-The single [Kling AI skill](<skills/Kling AI/SKILL.md>) handles image generation and editing, video generation and shot planning, account connection, credit checks, uploads, Elements, saved motions, and task status. Its folder and name are both `Kling AI`.
+The single [Kling AI skill](<skills/kling-ai/SKILL.md>) handles image generation and editing, video generation and shot planning, account connection, credit checks, uploads, Elements, saved motions, and task status. Its display name is `Kling AI`.
 
 Select Kling AI from the plugin or skill controls available in your app, or ask to use Kling AI in your request.
 

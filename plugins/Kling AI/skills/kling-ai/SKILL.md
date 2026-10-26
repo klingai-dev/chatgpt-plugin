@@ -1,5 +1,5 @@
 ---
-name: Kling AI
+name: kling-ai
 description: Generate and edit images, create videos, and check generation progress with Kling AI in ChatGPT and Codex. Use for text-to-image, image-to-image, text-to-video, image-to-video, Omni-Ref video (全能参考), start and end frames, motion control, reference uploads, Elements, credit checks, account connection, and sign-in troubleshooting.
 ---
 
