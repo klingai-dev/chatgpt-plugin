@@ -42,7 +42,7 @@ When the host displays an MCP App for the generation, let it refresh progress an
 
 ## Submission timeout or lost response
 
-Do not call the generation tool again. If a `generationId` is known, query it once. Otherwise report that creation state is unknown; the current MCP cannot list account history or recover a task by `taskTraceId`. Stop and wait for a new explicit user request to retry before any new submission. Do not treat the original request as authorization to retry.
+When a `generationId` is known, follow the progress rules above. If the submission leaves no known ID, report the actual error and any unknown creation or billing state, then stop. `query_tasks` requires that ID and cannot list account history or recover a task by `taskTraceId`. An unchanged balance or missing history entry does not resolve the state. A new submission requires fresh authorization.
 
 ## Result URL expired
 

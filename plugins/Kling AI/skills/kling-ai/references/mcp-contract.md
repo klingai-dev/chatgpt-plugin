@@ -19,7 +19,21 @@ Call only tools that exist in the current tool list.
 - `rationale` explains the user's objective and parameter choices. It does not replace the generation prompt.
 - `taskTraceId` is a UUIDv7. Reuse it for one objective and create a fresh value for an unrelated objective.
 
-Call `who_am_i` immediately before submission. When a tool description conflicts with a model declaration, apply the stricter constraint and stop an unsafe submission.
+Use current `who_am_i` definitions for the selected pair. Refresh stale definitions before submission. When a tool description conflicts with a model declaration, apply the stricter constraint and stop an unsafe submission.
+
+Bind each requested setting to its own argument when the selected model supports it. For example, if the live schema declares these names and values, a seven-second vertical clip uses:
+
+```json
+{
+  "arguments": [
+    {"name": "prompt", "value": "The creative description..."},
+    {"name": "duration", "value": "7"},
+    {"name": "aspect_ratio", "value": "9:16"}
+  ]
+}
+```
+
+Apply the same binding to requested resolution, count, and sound controls. Use the live input slots for reference media. A duration mentioned in the prompt alone leaves the actual duration setting unchanged. An equivalent fixed model setting needs no additional argument. Before submission, verify the serialized arguments and inputs against the brief, then use those effective settings in the result summary.
 
 ## Stable gates
 
@@ -40,6 +54,6 @@ Call `who_am_i` immediately before submission. When a tool description conflicts
 ## Known results
 
 - A generation submission normally returns `generationId` and `status`, and may return `creditsConsumed`.
-- `query_tasks` normally returns task status, timestamps, and `works[]`. A work may include primary media, unwatermarked media, and cover URLs. Determine terminal state and media semantics from the live response.
+- `query_tasks` requires a known `generationId`. It normally returns status, timestamps, and `works[]`. Keep using the known ID when the query response omits it. A work may include primary media, unwatermarked media, and cover URLs. Determine terminal state and media semantics from the live response.
 - Signed URLs may expire. Never log them or treat them as permanent asset identifiers.
 - For a tool without a public output schema, use the real response as returned. Do not invent fields or success states.
