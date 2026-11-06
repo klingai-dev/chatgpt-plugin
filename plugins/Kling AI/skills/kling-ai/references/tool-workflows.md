@@ -2,18 +2,18 @@
 
 ## Generation
 
-1. Follow the core skill's [connect and verify](../SKILL.md#first-step-connect-and-verify) flow. Use the current host's existing Kling AI connection at `https://klingai.com/mcp/plugin`, then read the current `tools/list`.
-2. Create or reuse the objective's UUIDv7 `taskTraceId`. Select a compatible pair through [model discovery](../SKILL.md#model-discovery). For video, apply the [video fit rules](omni-video.md).
-3. After selecting a pair, prepare reference roles. For generation or requested media preparation, upload required local media with `file_upload` and bind the returned URL under the live input name. Before submission, check the actual arguments and inputs using the [MCP contract](mcp-contract.md).
-4. Describe the final settings and apply the core [billing and authorization rules](../SKILL.md#billing-and-single-submission). End at the proposal when the user requested review.
-5. When authorized, call the selected generation tool once. If the submission leaves no known `generationId`, follow [submission troubleshooting](troubleshooting.md#submission-timeout-or-lost-response) and stop.
+1. Follow the core skill's [connect and verify](../SKILL.md#first-step-connect-and-verify) flow. Use the current host's existing Kling AI connection at `https://kling.ai/mcp/plugin`, then read the current `tools/list`.
+2. For video requests, first read [video generation](../SKILL.md#video-generation) and the [Omni-Ref guide](omni-video.md); discover `omni_ref_video` and use only compatible models returned for the account. Create a UUIDv7 `taskTraceId`, call `who_am_i`, and use only the models, arguments, enums, defaults, and inputs declared for the selected tool.
+3. When local media is present, upload it with `file_upload` and pass the returned URL under the live input name. Never pass a local path directly to the remote generation tool.
+4. Prepare the final settings and briefly describe the planned result. Proceed when the request and required inputs are ready; clarify gaps and respect requests to preview or pause.
+5. Call the selected generation tool exactly once with `{model, arguments[], inputs[], rationale, taskTraceId}`, and preserve its `generationId`.
 6. When the host displays an MCP App for the generation, let it refresh progress; do not query the same task from the model.
 7. Otherwise, use `query_tasks` at the provider-permitted interval until the task finishes, fails, is cancelled, or the turn cannot continue. Stop polling if a response displays the App. Without an App, report the current status and task ID; for successful outputs, provide one primary media link per requested output.
 
 ## Read-only operations
 
 - Account and credits: call `query_membership_and_credits` once.
-- Task status: call `query_tasks` once with the known `generationId`. A direct status request does not start long-running polling.
+- Task status: call `query_tasks` once; a direct status request does not start long-running polling.
 - Model capabilities: call `who_am_i` without creating a task.
 
 ## State changes
