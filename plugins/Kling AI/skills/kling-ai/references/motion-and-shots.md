@@ -24,6 +24,8 @@
 
 Do not stack multiple camera-movement verbs into one five-second shot.
 
+For continuous hand-object interaction, frame the action path so the hands and object stay visible through the final handoff or placement.
+
 ## Duration and multiple shots
 
 - 5 seconds: one action and one camera movement.
@@ -32,10 +34,13 @@ Do not stack multiple camera-movement verbs into one five-second shot.
 
 For multiple shots, give each shot a duration, framing, one narrative task, subject action, camera movement, and continuity anchor. Shot durations must sum to the total duration. The full plan is still one generation submission.
 
+When a hand-object interaction crosses a cut, match the grip, object position, and support contact at both sides of the cut. Continue the action from that state at the requested pace.
+
 ## Reference media
 
 - A start frame supplies the opening image for the video.
 - An end frame guides the ending when the selected model supports it.
+- For ordered keyframes, describe the transition between successive supplied states. Settle into the final frame without overshooting or snapping back unless requested.
 - Use an identity reference to preserve facial features, apparent age, hair, wardrobe, proportions, and distinguishing features.
 - Use a product reference to preserve dimensions, materials, labels, logo placement, and moving parts.
 - A motion-reference video should preferably show one subject clearly in a single shot. Follow the tool's current duration and resolution limits.

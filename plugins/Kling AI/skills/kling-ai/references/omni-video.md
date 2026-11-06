@@ -1,6 +1,12 @@
-# Omni-Ref video
+# Video model fit and Omni-Ref
 
-Use `omni_ref_video` as the default discovery entry point for ordinary video generation, including text-only, image, keyframe, Element, video, and audio reference requests. Discover the tool and call `who_am_i` as described in the [Kling AI skill](../SKILL.md#model-discovery). Prefer a returned Kling 4.0 video model compatible with the request; the live account response defines the canonical model name and all supported inputs and arguments.
+Compare compatible dedicated video and Omni-Ref tools using the [live discovery workflow](../SKILL.md#model-discovery). A text-only request can use an Omni-Ref model that accepts zero media inputs. A model's arguments and inputs apply only to its own tool/model pair.
+
+## Sound and shot requirements
+
+- Required silence needs a declared setting that disables sound or an explicit guarantee of silent output. Check both generated sound and retained source sound before ranking candidates. A text-to-video name, an absent audio field, or a prompt requesting silence does not establish this capability.
+- Check the selected model's own `arguments` and `inputs` for audio references, generated sound, and original-sound retention. Apply declared dependencies and mutual exclusions such as `enable_audio` versus `keepOriginalSound`. Disable unrequested sound or other content-expanding defaults when a legal off value exists. Omitting `music_prompt` does not guarantee no music.
+- For a continuous-shot request, describe the shot in the prompt. If a smart-shot control such as `prefer_multi_shots` only allows `true`, follow the live schema and explain the limit. A fixed true value does not establish that every result has cuts. A hard single-shot requirement needs a declared guarantee before submission.
 
 ## References and binding
 
