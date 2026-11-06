@@ -5,7 +5,7 @@ Generate images, edit reference images, and create videos with Kling AI. Connect
 ## Install in Codex
 
 ```bash
-codex plugin marketplace add https://github.com/klingai-dev/chatgpt-plugin.git --ref main
+codex plugin marketplace add https://github.com/klingai-dev/chatgpt-plugin.git --ref global
 codex plugin add kling-ai@kling-ai
 ```
 
