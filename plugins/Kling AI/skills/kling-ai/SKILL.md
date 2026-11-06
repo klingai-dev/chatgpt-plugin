@@ -1,15 +1,28 @@
 ---
 name: kling-ai
-description: Generate and edit images, create videos, and check generation progress with Kling AI in ChatGPT and Codex. Use for text-to-image, image-to-image, text-to-video, image-to-video, Omni-Ref video (全能参考), start and end frames, motion control, reference uploads, Elements, credit checks, account connection, and sign-in troubleshooting.
+description: Write Kling AI (可灵) prompts and storyboards, prepare generation settings, or generate and edit images and videos in ChatGPT and Codex. Use for Omni-Ref (全能参考), keyframes, motion control, required reference media, Elements, uploads, task status, credits, and account connection.
 ---
 
 # Kling AI
 
-Use the remote MCP server bundled with this plugin: `https://kling.ai/mcp/plugin`. This is the global endpoint. Keep the same endpoint for account switching; do not register a duplicate server or require a local MCP server.
+Use the remote MCP server bundled with this plugin: `https://klingai.com/mcp/plugin`. This is the China endpoint. Keep the same endpoint for account switching; do not register a duplicate server or require a local MCP server.
+
+## Request routing
+
+Choose the deliverable for this turn before connecting or discovering models.
+
+- **Prompt or storyboard only.** Return the requested creative work. Preserve requirements such as copy space, reference roles, and shot timing. Read [prompt construction](references/prompt-construction.md) for image prompts or [motion and shots](references/motion-and-shots.md) for video plans as needed. Skip account checks, uploads, model selection, unsolicited generation settings, and invitations to generate.
+- **Required asset missing.** Ask for the missing asset and explain its intended role, such as a product image for the first frame. End there. Skip unrelated questions, discovery, and uploads.
+- **Final settings for review.** Discover live capabilities and show the compatible settings, reference roles, and any required billing disclosure. Defer uploads unless the user also requests media preparation. Wait for authorization to submit.
+- **Generate now.** Follow the [shared workflow](#workflow) and the relevant [image](#image-generation) or [video](#video-generation) guidance. Honor authorization already given for the same unsubmitted request and unchanged final settings.
+- **Existing task status.** With a known `generationId`, call `query_tasks` once and report the returned state. If the ID is unknown, ask for it. Skip model discovery and generation.
+- **Account, uploads, motion library, or Elements.** Use the shared connection and asset workflows. Requests to create or update a reusable subject belong to the Element workflow.
+
+Identify each attachment's role from the request. Ask only when the role is ambiguous and would change the result.
 
 ## First step: connect and verify
 
-Apply this check before selecting a generation mode, preparing uploads, or submitting any task. Installing the plugin or selecting a skill does not prove that the user's Kling AI account is connected.
+Use this flow when generation preparation or an account operation requires verification, or when the requested remote tool reports an authentication problem. Installing the plugin or selecting a skill does not prove that the user's Kling AI account is connected.
 
 1. Discover this plugin's tools using the host's available tool-discovery mechanism. A tool missing from the initial snapshot may still be discoverable; read all relevant pages before concluding it is absent. If `who_am_i` is available, call it as a read-only connection check. A successful authenticated response means reuse the existing connection without another sign-in.
 2. If the host reports a disconnected account, an authorization requirement, or an authentication error, use its native connection flow for the existing Kling AI plugin when available. Tell the user to open the installed plugin's details and follow the account-connection prompt, sign in on the Kling AI page, review and approve the requested access, and return to this chat. Button labels vary by host and language; use observed labels rather than promising a specific Connect, Sign in, or Reconnect button. Never ask for credentials in chat or invent an authorization URL.
@@ -19,62 +32,52 @@ Apply this check before selecting a generation mode, preparing uploads, or submi
 
 Use the user's language. When the account is known to be disconnected, a suitable Chinese message is: “还需要连接你的 Kling AI 账号。请打开已安装的 Kling AI 插件详情，按页面提示连接账号，在可灵页面登录并确认授权后回到这里。我会先检查连接，再继续刚才的请求。目前尚未提交新的生成任务。” If connection status is unknown, say “当前还无法确认账号是否已连接” instead. Only say you opened an authorization flow when the host actually did so.
 
-## Request routing
-
-- For text-to-image, image-to-image, posters, covers, product stills, portraits, and image variants, follow [image generation](#image-generation).
-- For text-to-video, image-to-video, Omni-Ref video (全能参考), start and end frames, motion control, animation, camera movement, storyboards, and video concepts, follow [video generation](#video-generation). Read [Omni-Ref video](references/omni-video.md) before selecting a video tool or model.
-- For OAuth, sign-out or account switching, uploads, the motion library, Elements, credit checks, cross-media requests, and task-status requests, use the shared workflow below.
-- Follow up on an existing task with `query_tasks`; do not create a replacement generation.
-
-Identify each attachment's role from the request: start frame, end frame, identity or product reference, image to edit, motion source, or style reference. Ask only when the role is ambiguous and would change the result.
-
 ## Connection boundaries
 
 - Use OAuth managed by the current host's plugin connection. Never request an API key, token, cookie, authorization header, or credential file. Never log private account fields or signed URLs.
 - The host manages OAuth client registration and its metadata. Do not require the model or user to inject `client_name`, edit OAuth requests, or supply a client secret before starting the native sign-in flow. Report an actual registration failure through [troubleshooting](references/troubleshooting.md).
-- The native `.mcp.json` and portable `mcp.json` must both retain the same single global endpoint, `https://kling.ai/mcp/plugin`. Let the host load the appropriate package entry; do not register a second standalone Kling AI server or add a region-switching flow.
+- The native `.mcp.json` and portable `mcp.json` must both retain the same single China endpoint, `https://klingai.com/mcp/plugin`. Let the host load the appropriate package entry; do not register a second standalone Kling AI server or add a region-switching flow.
 - Create one UUIDv7 `taskTraceId` for each unrelated new objective. Reuse it across discovery, upload, generation, and querying for the same objective. Present `generationId` to the user as the task ID; do not expose `taskTraceId` unless troubleshooting requires it.
 
 ## Model discovery
 
-- Read all pages of the current tool list. Discover `omni_ref_video` explicitly for ordinary video requests, including text, images, keyframes, Elements, and audio references. Use `motion_control` for motion transfer or another entry point explicitly requested by the user.
-- Call `who_am_i` with `tools: ["omni_ref_video"]` only when its live schema declares that filter; otherwise read the full response. Recommend a returned Kling 4.0 video model when it meets the request; use only canonical names or aliases actually returned for this account and tool.
-- Tool presence, examples, or a default model name do not establish model access. If a requested model is absent from a filtered response, inspect the other discovered generation entry points before reporting it unavailable; preserve the requested output type.
-- If discovery fails or the omni tool is missing, report the connection limitation. Do not silently fall back, change regions, or invent a local tool registration.
+- Discover the full tool schemas through the host. Read all relevant pages before concluding a tool is absent. Compare `text_to_video` and `omni_ref_video` for text-driven video, and `image_to_video` and `omni_ref_video` for image-driven video, when present. Consider the tool named by the user and use `motion_control` for motion transfer.
+- Query `who_am_i` for all relevant candidates. Use the `tools` filter only when declared by its live schema. Use only model names or aliases returned for the chosen tool and account. If the connection check already returned the relevant definitions, reuse them while current.
+- Match the user's model restriction, output settings, sound, shot requirements, and reference roles to the same tool/model pair before ranking candidates or uploading media. Recommend V4 only when live discovery returns a compatible Kling 4.0 pair. Use a compatible live default if other models are allowed. When no pair fits, report the unmet requirement and stop. If discovery fails, resolve the actual connection or tool-loading issue first.
 
 ## Billing and single submission
 
 - Image and video generation, including motion control, use Kling AI credits. Call `who_am_i` before submission and use its live model and argument definitions. If both version values are available and the returned `mcpVersion` is newer than the cached tool version, explain that the tool list needs refreshing and guide the user through the host's supported refresh flow. Do not infer a version mismatch when no cached version is available.
-- For a generation request with sufficient information, prepare the live settings, briefly describe the planned result, and proceed with generation. Use the declared defaults for optional settings. Clarify missing intent or necessary inputs, and respect requests to preview or pause. Keep read-only checks, uploads, and draft preparation within their requested scope.
-- Submit at most once per explicit generation request. Never retry automatically or silently change models after a failure, timeout, ambiguous response, or rendering problem.
-- A submitted task is still in progress. Report completion only when the task has succeeded and returned a usable image or video URL. If individual outputs have statuses, check that the output succeeded too. A video thumbnail does not count as a completed video.
-- After receiving a `generationId`, use only `query_tasks` for status. If the submission response is lost before a `generationId` is known, stop and report that creation state is unknown; the current MCP cannot list account history or recover a task by `taskTraceId`.
+- Show the final mode, model, prompt summary, output settings, and reference roles. Include any billing disclosure required by the live tool, such as when input video duration counts toward Omni-Ref billing. An explicit generation request can proceed when the settings and inputs are ready. A preview, an upload, or a credit check by itself does not authorize submission.
+- Submit at most once per explicit generation request, including a rejected attempt. Any retry requires fresh authorization.
+- With a known `generationId`, use only `query_tasks` for status. If a submission leaves no known ID, report the returned error and any unknown creation or billing state, then stop. Do not call or offer `query_tasks` without an ID. It cannot list task history or recover a task by `taskTraceId`. A balance check or missing history entry cannot establish whether the submission succeeded or consumed credits.
+- Report the returned status, known task ID, and effective submitted settings when known. Report completion only when the task and relevant output succeeded and a usable media URL is available. Keep submission count separate from charged credits. Report an actual charge only from a returned charged amount such as `creditsConsumed`. Describe output quality and sound only if inspected.
 
 Read [tool workflows](references/tool-workflows.md), the [MCP contract](references/mcp-contract.md), and [asset workflows](references/asset-workflows.md) before generation, Element management, motion-library use, or local media preparation. Read [troubleshooting](references/troubleshooting.md) only after an authorization, schema, upload, or provider failure.
 
 ## Workflow
 
-1. Classify the request as generation, motion control, Element management, account mutation, or read-only query.
-2. Read the current remote tool definitions. Before generation or motion control, call `who_am_i` and use only the canonical model name, arguments, defaults, enums, and media inputs declared for the selected model.
+1. Follow [request routing](#request-routing) and stop at the requested deliverable.
+2. For generation preparation, verify the connection and select a compatible pair through [model discovery](#model-discovery).
 3. For Element, motion-library, or upload requests, follow [asset workflows](references/asset-workflows.md); these operations do not implicitly create a generation task.
 4. Infer reasonable creative details from the brief; ask only about missing requirements that would materially change the result. Take models, fields, and supported values from the live schema.
-5. When local media is required, upload it first and reuse the returned provider reference exactly as the live schema requires. Upload completion does not itself authorize generation.
-6. Once the request and required inputs are resolved, call the selected generation tool exactly once and preserve both `generationId` and `taskTraceId`.
+5. Once the pair is selected, upload required local media and bind the returned references as the live schema requires. Compare the actual request fields with the user's explicit requirements before submission.
+6. Follow [billing and single submission](#billing-and-single-submission) and preserve any returned `generationId` with the objective's `taskTraceId`.
 7. If the host displays an MCP App for the generation, let it refresh progress; do not poll the same task from the model. Otherwise, use `query_tasks` at the provider-permitted interval until the task finishes, fails, is cancelled, or the turn cannot continue. If a later response displays the App, stop polling from the model.
 8. For a direct request about an existing task, call `query_tasks` once and report the current state. Do not start a new generation or long-running polling loop.
 9. When the host displays the Kling AI MCP App, use it as the media preview and avoid duplicate media or download links outside it. When no App is displayed, use the tool's text response and provide one primary media link for each requested output.
-10. Call `element_delete` or `logout` only when the user explicitly requests deletion, sign-out, or account switching. Account switching stays on the same global endpoint. When switching accounts, start the current host's native OAuth flow after successful logout. For sign-out alone, remain signed out.
+10. Call `element_delete` or `logout` only when the user explicitly requests deletion, sign-out, or account switching. Account switching stays on the same China endpoint. When switching accounts, start the current host's native OAuth flow after successful logout. For sign-out alone, remain signed out.
 
 ## Quality defaults
 
-Apply these defaults only when the user did not specify another choice and the live schema supports them:
+Apply these defaults only during generation preparation, when the user did not specify another choice and the live schema supports them.
 
 - Model: prefer a full-quality model compatible with the requested mode and references. Prefer Turbo, fast, or low-cost models only when the user explicitly prioritizes drafts, speed, or credit savings.
 - Image resolution: prefer `2k` for normal delivery, `4k` for commercial work, advertising, fine materials, or crop-heavy post-production, and `1k` only for drafts or speed. Never lower a higher live default.
 - Video resolution: prefer `1080p` for normal delivery and `4k` for supported commercial, large-screen, or post-production work. Use `720p` for drafts, speed, cost, or model limitations. Never lower a higher live default.
 - Output count: generate one result unless the user requests more.
 - Duration: use about 5 seconds for one action or shot, about 10 seconds for dialogue, a complete product action, or two connected beats, and longer only when supported and narratively necessary.
-- Aspect ratio: use `9:16` for vertical shorts, `1:1` for square feeds, and `16:9` for landscape ads or web. For image-to-video, preserve the first frame unless the live tool requires an explicit ratio.
+- Aspect ratio: use `9:16` for vertical shorts, `1:1` for square feeds, and `16:9` for landscape ads or web. For image-to-video without a requested ratio, preserve the first-frame composition unless the live tool requires a ratio. Pass an explicitly requested ratio when supported, including with a first frame.
 
 ## Image generation
 
@@ -93,15 +96,12 @@ Before the shared single-submission workflow, prepare the mode, model, prompt su
 
 ## Video generation
 
-Read [Omni-Ref video](references/omni-video.md) before selecting a tool or model for a new video request. Read [motion and shots](references/motion-and-shots.md) for camera direction, continuity, multi-beat timing, or reference media, and [video scene patterns](references/video-scene-patterns.md) for product, advertising, social, or cinematic work.
+Read [video model fit and Omni-Ref](references/omni-video.md) before selecting a video pair, especially for sound, shot control, and references. Read [motion and shots](references/motion-and-shots.md) for camera direction, continuity, multi-beat timing, or reference media, and [video scene patterns](references/video-scene-patterns.md) for product, advertising, social, or cinematic work.
 
-- Default to discovering `omni_ref_video` for text, image, keyframe, Element, video, or audio reference requests. Prefer a returned compatible Kling 4.0 video model. Use `motion_control` for motion transfer; use `text_to_video` or `image_to_video` when explicitly requested and supported.
 - Resolve missing requirements that materially affect the result: destination and aspect ratio, duration, required references, protected facts, narration or copy, or shot structure.
-- Upload local media first and identify each file's role: start frame, end frame, identity or product reference, style reference, or motion source. If an upload fails, explain the problem; do not change generation modes without the user's agreement.
+- Preserve each reference role when selecting and binding inputs. A required first frame needs a first-frame input. If an upload fails, explain the problem and stop before submission.
 - Build a motion-first prompt covering opening composition, subject action, camera movement, environmental motion, timing, continuity, protected facts, light, materials, and necessary exclusions.
-- For `omni_ref_video`, validate reference types, required inputs, per-type and combined limits, and audio or Element support against the selected model. Never infer capabilities from the tool name. The dedicated `text_to_video` tool does not use Elements.
 - Pass only reference roles supported by the selected model's live schema. For Elements, the motion library, or motion control, follow [asset workflows](references/asset-workflows.md). Motion control requires a subject image and exactly one motion source: a motion-library ID or a source video. Validate motion direction and duration.
-- Follow the shared duration, resolution, ratio, and output-count defaults. For image-to-video, preserve the first-frame composition unless the tool requires an explicit ratio.
 - Use one primary camera movement in a five-second shot. Use multiple shots only when location, time, scale, or information state changes. A multi-shot plan is one video task; do not submit one generation per shot without explicit approval for separate tasks.
 - Do not add unrequested narration, readable text, extra characters, product claims, prices, endorsements, or certifications.
 
@@ -113,4 +113,4 @@ Before the shared single-submission workflow, prepare the mode, model, prompt su
 - Unsupported argument: refresh the live tool definitions and change only the rejected field. Report the revised settings and stop. Submit again only after a new explicit user request to retry; do not retry automatically.
 - Insufficient credits or provider failure: report the provider message and task ID when available, then stop. Do not retry automatically.
 - Expired result URL: query the original task ID for a fresh URL; do not create a new task.
-- Opaque error, unexpected empty result, or billing anomaly: submit one feedback report as directed by the tool description. Feedback is not a retry, refund, or fix.
+- Opaque error or unexpected empty result: report the known error and unresolved state. For a separate billing anomaly, follow the live tool's feedback instructions.
