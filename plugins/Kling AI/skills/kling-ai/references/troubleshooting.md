@@ -30,19 +30,36 @@ Do not substitute an API key, manually pasted token, custom callback, or an unre
 - If tools remain missing, report a plugin loading or connection problem and the observed non-sensitive error. Keep the same China endpoint, `https://klingai.com/mcp/plugin`; do not switch regions, attach an unrelated app, edit credentials, or register another server.
 - A CLI server list is a diagnostic aid, not proof that a plugin connection works. A successful authenticated `who_am_i` response is the connection check.
 
-## Upload failure
+## Parameter or specification validation
+
+- Refresh `tools/list` and `who_am_i` on the same connection. Check the actual request for a nonblank top-level `model`, required `arguments[]` entries such as `prompt`, and required `inputs[]` slots. `image_1` and `first_image` are distinct slots. Use the exact field names and enum values for the selected tool and model.
+- If a resolution such as `1080p` is rejected, compare the actual value with the selected model's live enum and applicability conditions. If the requested specification is unavailable, ask the user to choose a supported setting. If the service rejects a value that meets the live constraints, report the mismatch with the trace ID and redacted field details. For host-side diagnosis, compare the model tool call with the actual MCP request and the live schema's `required` fields when available.
+
+## Upload or reference failure
 
 - Refresh the live schema and verify the upload tool and response fields.
 - Reuse the upload result exactly in generation inputs and keep the same `taskTraceId`.
 - Do not pass local paths, expired signed URLs, or undeclared input names to a remote generation tool.
+- If a resource error points to the input, verify the exact slot and compare the outbound `inputs[].url` with the full successful upload response. Recover a valid reference from the original media when available. A fix before any generation call can continue the authorized first submission.
+- If the service says to retry using the same generation ID, query only the ID confirmed for this submission. A source task or upload ID cannot identify the new task. If the generation call was sent and its outcome remains unclear, report the unknown creation and billing state and preserve the trace ID. For diagnosis, compare redacted URL summaries across upload, host tool binding, and the outbound MCP request where available. Keep signed URLs and credentials out of logs.
 
 ## Task is still running
 
-When the host displays an MCP App for the generation, let it refresh progress and do not poll the same task from the model. Otherwise, use `query_tasks` at the provider-permitted interval. Stop polling if the task finishes or fails, an App is displayed, the user cancels, or the turn cannot continue. Report the current status and task ID. A later explicit status request can call `query_tasks` once.
+Follow [task status and results](tool-workflows.md#task-status-and-results). If a refresh fails, report the task ID and latest confirmed state.
 
 ## Submission timeout or lost response
 
 When a `generationId` is known, follow the progress rules above. If the submission leaves no known ID, report the actual error and any unknown creation or billing state, then stop. `query_tasks` requires that ID and cannot list account history or recover a task by `taskTraceId`. An unchanged balance or missing history entry does not resolve the state. A new submission requires fresh authorization.
+
+Treat a generic service-unavailable message as a service error even when the outer code is `InvalidParameter`. Use the parameter checks when the response identifies an actual field.
+
+## Queue full or rate limited
+
+Distinguish a full generation queue from a rate-limited status query. Preserve the original settings and any task ID. Report queue or task state only as confirmed by the provider. Stop a rate-limited status check and return the latest confirmed state. If the user later asks to continue, check any existing task first and apply the single-submission rules.
+
+## Insufficient credits
+
+Use the current balance from `query_membership_and_credits` and any explicit service rejection. Plan entitlements cannot stand in for the available balance. Follow [resuming after a top-up](tool-workflows.md#resuming-after-a-top-up) and wait for the user to request continuation.
 
 ## Result URL expired
 

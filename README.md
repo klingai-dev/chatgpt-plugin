@@ -15,7 +15,7 @@ codex plugin add kling-ai@kling-ai
 2. Follow the account-connection prompt. Sign in on the Kling AI page, review and approve the requested access, then return to the chat. The controls and their labels depend on the app and language.
 3. Ask: “Check my Kling AI connection and credit balance. Do not generate anything.” The assistant will verify the connection before checking your credits.
 
-Installing the plugin or selecting a skill does not connect your Kling AI account. If the tools are unavailable, the assistant should help you check whether the plugin is enabled and the account is connected. Refreshing the app or starting a new chat may be necessary after a connection or plugin update. See [connection troubleshooting](<plugins/Kling AI/skills/Kling AI/references/troubleshooting.md>).
+Installing the plugin or selecting a skill does not connect your Kling AI account. If the tools are unavailable, the assistant should help you check whether the plugin is enabled and the account is connected. Refreshing the app or starting a new chat may be necessary after a connection or plugin update. See [connection troubleshooting](<plugins/Kling AI/skills/kling-ai/references/troubleshooting.md>).
 
 Keep passwords and other credentials on the sign-in page; do not paste them into chat.
 
@@ -23,7 +23,7 @@ Keep passwords and other credentials on the sign-in page; do not paste them into
 
 Ask: “Create a 5-second video of a giant robot landing in a ruined city as the camera moves closer.”
 
-Generation uses Kling AI credits. The assistant submits each requested generation once and asks before retrying a failed or uncertain submission.
+Generation uses Kling AI credits. The assistant checks your balance and submits each authorized generation once. If you need to top up, sign in to the same Kling AI account, add credits, then return to the same chat and say “Continue the previous task.” The assistant checks any existing task first and verifies your balance before a new submission.
 
 See [plugin usage and capabilities](<plugins/Kling AI/README.md>).
 
