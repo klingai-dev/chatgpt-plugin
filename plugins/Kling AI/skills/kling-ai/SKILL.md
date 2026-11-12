@@ -15,7 +15,8 @@ Choose the deliverable for this turn before connecting or discovering models.
 - **Required asset missing.** Ask for the missing asset and explain its intended role, such as a product image for the first frame. End there. Skip unrelated questions, discovery, and uploads.
 - **Final settings for review.** Discover live capabilities and show the compatible settings, reference roles, and any required billing disclosure. Defer uploads unless the user also requests media preparation. Wait for authorization to submit.
 - **Generate now.** Follow the [shared workflow](#workflow) and the relevant [image](#image-generation) or [video](#video-generation) guidance. Honor authorization already given for the same unsubmitted request and unchanged final settings.
-- **Existing task status.** With a known `generationId`, call `query_tasks` once and report the returned state. If the ID is unknown, ask for it. Skip model discovery and generation.
+- **Top-up or resume.** Follow [resuming after a top-up](references/tool-workflows.md#resuming-after-a-top-up). A top-up update alone calls for a balance check. An explicit continuation request checks any existing task before preparing a new submission.
+- **Existing task status or missing result.** With a known `generationId`, follow the [status rules](references/tool-workflows.md#task-status-and-results). If the ID is unknown, ask for it. Skip model discovery and generation.
 - **Account, uploads, motion library, or Elements.** Use the shared connection and asset workflows. Requests to create or update a reusable subject belong to the Element workflow.
 
 Identify each attachment's role from the request. Ask only when the role is ambiguous and would change the result.
@@ -49,11 +50,12 @@ Use the user's language. When the account is known to be disconnected, a suitabl
 
 - Image and video generation, including motion control, use Kling AI credits. Call `who_am_i` before submission and use its live model and argument definitions. If both version values are available and the returned `mcpVersion` is newer than the cached tool version, explain that the tool list needs refreshing and guide the user through the host's supported refresh flow. Do not infer a version mismatch when no cached version is available.
 - Show the final mode, model, prompt summary, output settings, and reference roles. Include any billing disclosure required by the live tool, such as when input video duration counts toward Omni-Ref billing. An explicit generation request can proceed when the settings and inputs are ready. A preview, an upload, or a credit check by itself does not authorize submission.
+- Immediately before each paid generation call, including `text_to_image` and `image_to_image`, use `query_membership_and_credits` on the same connection. Pause if the current balance is unavailable, nonpositive, or insufficient for a live estimate of the same settings. Keep the request in the current chat and follow the [top-up workflow](references/tool-workflows.md#resuming-after-a-top-up) for insufficient credits. A positive balance alone cannot establish affordability when the service returns no estimate.
 - Submit at most once per explicit generation request, including a rejected attempt. Any retry requires fresh authorization.
 - With a known `generationId`, use only `query_tasks` for status. If a submission leaves no known ID, report the returned error and any unknown creation or billing state, then stop. Do not call or offer `query_tasks` without an ID. It cannot list task history or recover a task by `taskTraceId`. A balance check or missing history entry cannot establish whether the submission succeeded or consumed credits.
 - Report the returned status, known task ID, and effective submitted settings when known. Report completion only when the task and relevant output succeeded and a usable media URL is available. Keep submission count separate from charged credits. Report an actual charge only from a returned charged amount such as `creditsConsumed`. Describe output quality and sound only if inspected.
 
-Read [tool workflows](references/tool-workflows.md), the [MCP contract](references/mcp-contract.md), and [asset workflows](references/asset-workflows.md) before generation, Element management, motion-library use, or local media preparation. Read [troubleshooting](references/troubleshooting.md) only after an authorization, schema, upload, or provider failure.
+Read [tool workflows](references/tool-workflows.md), the [MCP contract](references/mcp-contract.md), and [asset workflows](references/asset-workflows.md) before generation, Element management, motion-library use, or local media preparation. Read [troubleshooting](references/troubleshooting.md) after an authorization, schema, upload, or provider failure.
 
 ## Workflow
 
@@ -63,8 +65,8 @@ Read [tool workflows](references/tool-workflows.md), the [MCP contract](referenc
 4. Infer reasonable creative details from the brief; ask only about missing requirements that would materially change the result. Take models, fields, and supported values from the live schema.
 5. Once the pair is selected, upload required local media and bind the returned references as the live schema requires. Compare the actual request fields with the user's explicit requirements before submission.
 6. Follow [billing and single submission](#billing-and-single-submission) and preserve any returned `generationId` with the objective's `taskTraceId`.
-7. If the host displays an MCP App for the generation, let it refresh progress; do not poll the same task from the model. Otherwise, use `query_tasks` at the provider-permitted interval until the task finishes, fails, is cancelled, or the turn cannot continue. If a later response displays the App, stop polling from the model.
-8. For a direct request about an existing task, call `query_tasks` once and report the current state. Do not start a new generation or long-running polling loop.
+7. Follow [task status and results](references/tool-workflows.md#task-status-and-results). Let a displayed MCP App refresh progress. Without the App, track the same `generationId` at the provider-permitted interval.
+8. For a direct request about an existing task, call `query_tasks` once and report the current state or the latest confirmed state if the refresh fails.
 9. When the host displays the Kling AI MCP App, use it as the media preview and avoid duplicate media or download links outside it. When no App is displayed, use the tool's text response and provide one primary media link for each requested output.
 10. Call `element_delete` or `logout` only when the user explicitly requests deletion, sign-out, or account switching. Account switching stays on the same global endpoint. When switching accounts, start the current host's native OAuth flow after successful logout. For sign-out alone, remain signed out.
 
@@ -85,7 +87,7 @@ Read [prompt construction](references/prompt-construction.md) for reference imag
 
 - Use `text_to_image` for a new image. Use `image_to_image` when source media controls identity, product structure, composition, editable content, or style. An attachment alone does not determine the mode.
 - Resolve missing requirements that materially affect the result: subject, destination and aspect ratio, required copy, reference roles, protected facts, or output count.
-- Upload local images first and use the selected model's declared input names. If an upload fails, explain the problem; do not switch to text-to-image without the user's agreement.
+- Upload local images when needed and bind them to the selected model's declared slots, including `image_1` when required. Use the schema's exact `inputType` value, including uppercase `URL` when declared. If an upload fails, explain the problem; do not switch to text-to-image without the user's agreement.
 - Build one prompt covering subject, action, environment, composition, lighting, color, materials, camera language, protected facts, and necessary exclusions.
 - Text-to-image does not use Elements. Before using an Element with image-to-image, follow [asset workflows](references/asset-workflows.md#using-elements-in-generation), call `element_get`, and choose a model whose live schema supports `elements`. Bind the exact ID in both the prompt and structured `elements` argument.
 - State every reference image's role. For edits and variations, apply the requested changes and preserve other details; for a comparison that varies one feature, keep the rest consistent.
@@ -100,6 +102,7 @@ Read [video model fit and Omni-Ref](references/omni-video.md) before selecting a
 
 - Resolve missing requirements that materially affect the result: destination and aspect ratio, duration, required references, protected facts, narration or copy, or shot structure.
 - Preserve each reference role when selecting and binding inputs. A required first frame needs a first-frame input. If an upload fails, explain the problem and stop before submission.
+- Validate explicit specifications such as `1080p` against the selected tool and model's live resolution enum and conditions before submission.
 - Build a motion-first prompt covering opening composition, subject action, camera movement, environmental motion, timing, continuity, protected facts, light, materials, and necessary exclusions.
 - Pass only reference roles supported by the selected model's live schema. For Elements, the motion library, or motion control, follow [asset workflows](references/asset-workflows.md). Motion control requires a subject image and exactly one motion source: a motion-library ID or a source video. Validate motion direction and duration.
 - Use one primary camera movement in a five-second shot. Use multiple shots only when location, time, scale, or information state changes. A multi-shot plan is one video task; do not submit one generation per shot without explicit approval for separate tasks.
@@ -110,7 +113,8 @@ Before the shared single-submission workflow, prepare the mode, model, prompt su
 ## Failure behavior
 
 - Unauthorized: follow the first-step connection flow and [host-specific troubleshooting](references/troubleshooting.md). Never submit a generation to test authorization, attach an unrelated app, add another server, or copy credentials.
-- Unsupported argument: refresh the live tool definitions and change only the rejected field. Report the revised settings and stop. Submit again only after a new explicit user request to retry; do not retry automatically.
-- Insufficient credits or provider failure: report the provider message and task ID when available, then stop. Do not retry automatically.
+- Unsupported argument or resource error: follow [parameter validation](references/troubleshooting.md#parameter-or-specification-validation) or [upload and reference troubleshooting](references/troubleshooting.md#upload-or-reference-failure). Preserve the original prompt, mode, and reference roles when correcting a rejected field.
+- Insufficient credits: preserve the original request and follow [resuming after a top-up](references/tool-workflows.md#resuming-after-a-top-up).
+- Provider failure: report the redacted provider message and any confirmed task ID. If the submission outcome is unclear, follow [submission troubleshooting](references/troubleshooting.md#submission-timeout-or-lost-response).
 - Expired result URL: query the original task ID for a fresh URL; do not create a new task.
 - Opaque error or unexpected empty result: report the known error and unresolved state. For a separate billing anomaly, follow the live tool's feedback instructions.

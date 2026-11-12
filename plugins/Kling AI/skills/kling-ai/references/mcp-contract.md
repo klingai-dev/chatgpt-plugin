@@ -13,9 +13,9 @@ Call only tools that exist in the current tool list.
 ## Generation request
 
 - Generation tools use `model`, `arguments[]`, `inputs[]`, `rationale`, and `taskTraceId`.
-- `model` must be a canonical model name returned by `who_am_i` for the selected tool.
-- Each `arguments[]` item is `{name, value}`. Pass `value` as a string when required by the tool description, and pass only arguments declared for the selected model.
-- Each `inputs[]` item is `{name, inputType, url}`. Obtain names and `inputType` values from the live schema; upload local media before using it.
+- Always pass a nonblank top-level `model` using the canonical ID returned by `who_am_i` for the selected tool, even if the tool's `required` list omits it.
+- Each `arguments[]` item is `{name, value}`. Supply each required argument once. When the model requires `prompt`, use a nonblank prompt unless it permits an empty value and that matches the user's intent. Encode values as strings when required by the live tool and use the selected model's declared resolution enum and conditions.
+- Each `inputs[]` item is `{name, inputType, url}`. Supply every required slot for the selected model and use exact schema literals such as `URL` when declared. Use the [complete uploaded media reference](asset-workflows.md#local-media-uploads) for uploaded inputs.
 - `rationale` explains the user's objective and parameter choices. It does not replace the generation prompt.
 - `taskTraceId` is a UUIDv7. Reuse it for one objective and create a fresh value for an unrelated objective.
 
@@ -25,6 +25,7 @@ Bind each requested setting to its own argument when the selected model supports
 
 ```json
 {
+  "model": "<canonical ID from who_am_i>",
   "arguments": [
     {"name": "prompt", "value": "The creative description..."},
     {"name": "duration", "value": "7"},
