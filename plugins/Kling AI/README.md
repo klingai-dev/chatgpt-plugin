@@ -4,8 +4,10 @@ Generate images, edit reference images, and create videos with Kling AI in ChatG
 
 ## Capabilities
 
-- Generate and edit product photos, posters, portraits, cover images, and other visuals.
-- Create videos from text, images, or mixed references with Omni-Ref (全能参考), and use start and end frames or motion control when supported by the selected model.
+- Generate images from text, edit reference images, and create connected image series with a model that supports them. The plugin checks the current account for a compatible default image model.
+- **Kling 4.0** supports text-to-video, image-to-video with first, last, and intermediate keyframes, and Omni-Ref (全能参考) with images, video, audio, and Elements. It produces 3–30 second videos at 720p, with 1080p available to eligible accounts.
+- **Kling 4.0 Flash** is optimized for speed. It supports text-to-video, a single first-frame image, and Omni-Ref with images, video, and Elements. It produces 3–20 second videos at 720p.
+- Both Omni-Ref models support smart shot splitting. Choose either synchronized sound generation or source-video sound retention. Check the connected account for available models and settings.
 - Upload reference images, videos, and audio; save and reuse subjects as Elements; and browse saved motions.
 - Check account credits and generation progress. When the app supports the interactive result view, it shows progress and completed media there; otherwise, the assistant provides a result link.
 
@@ -36,13 +38,25 @@ Read-only account check:
 
 > Check my Kling AI connection and credit balance. Do not generate anything.
 
-Image generation:
+**连续组图**
 
-> Create a 4:5 poster of a glass perfume bottle against a dark red studio background, with soft rim lighting. Leave room for text in the upper-right corner.
+> 用可灵一次生成 3 张连续组图：同一只穿复古宇航服的小熊猫从空间站出舱、掠过舷窗、转身望向地球。
 
-Video generation:
+**可灵 4.0 文生视频**
 
-> Create a continuous 5-second, 16:9 shot outside a convenience store on a rainy night. A vintage motorcycle comes to a stop as the camera slowly moves closer.
+> 用可灵 4.0 生成 20 秒电影感视频：机甲战士从高空砸向地面，碎石与尘雾四散，镜头快速推近。
+
+**可灵 4.0 Flash 首帧图生视频**
+
+> 用可灵 4.0 Flash 以我的运动鞋商品图为首帧生成 20 秒、720p 视频。镜头缓慢绕鞋一周，最后停在鞋面特写。
+
+**动作库与动作控制**
+
+> 预览动作库里已保存的动作。等我选定后，把这个动作应用到我的主体图上生成视频。
+
+**可复用主体**
+
+> 把我的角色正面图和侧面图保存为名叫「小白」的可复用主体，供后续创作使用。
 
 Task query:
 

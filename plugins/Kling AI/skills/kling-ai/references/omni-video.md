@@ -2,6 +2,12 @@
 
 Compare compatible dedicated video and Omni-Ref tools using the [live discovery workflow](../SKILL.md#model-discovery). A text-only request can use an Omni-Ref model that accepts zero media inputs. A model's arguments and inputs apply only to its own tool/model pair.
 
+## Kling 4.0 and Kling 4.0 Flash
+
+- Match a named model to the complete name or alias in the account's live discovery results. Confirm that the selected tool and model support the requested settings.
+- Kling 4.0 supports first, last, and intermediate keyframes for image-to-video, and Omni-Ref with images, videos, audio, and Elements. Its documented duration is 3–30 seconds at 720p, with 1080p for eligible accounts.
+- Kling 4.0 Flash uses a single first frame for image-to-video and supports Omni-Ref with images, videos, and Elements. Its documented duration is 3–20 seconds at 720p. For a separate audio reference, use Kling 4.0 Omni-Ref when its live schema exposes an audio input slot.
+
 ## Sound and shot requirements
 
 - Required silence needs a declared setting that disables sound or an explicit guarantee of silent output. Check both generated sound and retained source sound before ranking candidates. A text-to-video name, an absent audio field, or a prompt requesting silence does not establish this capability.

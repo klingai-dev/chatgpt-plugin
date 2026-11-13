@@ -21,7 +21,8 @@
 - For an explicit status request or a report that a known task produced no visible result, call `query_tasks` once with its `generationId`. Report the snapshot or deliver the completed result. To refresh a result URL, query its original task.
 - After submission, let the displayed MCP App refresh progress. If the App is absent, use `query_tasks` at the provider-permitted interval with the same `generationId` until the task succeeds or fails. Stop polling when the App appears, the user cancels, the turn cannot continue, or the service rate limits or fails a query. During ongoing polling, if a resource error explicitly asks to query the same ID later, allow one further status query at the permitted interval and stop if the error repeats.
 - If a refresh fails or tracking ends before completion, return the task ID and the latest confirmed state. Say when the refresh failed. Report the state as unconfirmed only when no state has ever been confirmed. A query failure leaves the original submission in place.
-- Use the displayed MCP App to preview results. Without it, return one usable primary media link per requested successful output.
+- Report full completion only when the task succeeds and usable outputs meet the requested type and count. Count a work only if it has usable primary media and its status, when supplied, is successful. If a successful task returns fewer usable outputs than requested, report the actual count, such as 2 of 3 images, and deliver the available works. If it returns none, report the missing result and keep the task ID.
+- Use the displayed MCP App to preview results. Without it, return one usable primary media link per successful output.
 
 ## Read-only operations
 

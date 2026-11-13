@@ -23,7 +23,7 @@
       "interface": {
         "displayName": "Kling AI",
         "shortDescription": "Create images and videos",
-        "longDescription": "Generate images and videos from text prompts or reference media with Kling AI (可灵AI). Create product photos, posters, portraits, social media content, and videos with one or more shots. Use start and end frames, motion control, and reusable subjects (Elements) with models that support them. Upload reference images, videos, and audio, manage Elements, browse the motion library, check your credit balance, and track generation progress. A connected Kling AI account is required. Generation uses Kling AI credits. Model availability and supported settings vary by account.",
+        "longDescription": "Generate images and connected image series, edit reference images, and create videos with Kling AI (可灵AI). Create product photos, posters, portraits, social media content, and videos with one or more shots. Kling 4.0 supports text-to-video, image-to-video with first, last, and intermediate keyframes, and Omni-Ref with images, videos, audio, and reusable subjects (Elements). It produces 3–30 second videos at 720p, with 1080p available to eligible accounts. Kling 4.0 Flash is optimized for speed and produces 3–20 second videos at 720p from text, a single first-frame image, or Omni-Ref with images, videos, and Elements. Both Omni-Ref models support smart shot splitting and a choice between synchronized sound generation and source-video sound retention. Use models with motion control to transfer a saved motion or a reference video to a subject image. Upload reference images, videos, and audio, manage Elements, browse the motion library, check your credit balance, and track generation progress. A connected Kling AI account is required. Generation uses Kling AI credits. Model availability and supported settings vary by account.",
         "developerName": "Kling AI",
         "category": "Creativity",
         "capabilities": [
@@ -35,9 +35,9 @@
         "privacyPolicyURL": "https://kling.ai/docs/privacy-policy",
         "termsOfServiceURL": "https://kling.ai/docs/user-policy",
         "defaultPrompt": [
-          "Draw a red panda in a vintage spacesuit floating by a space station window, lit by Earth’s blue glow, cinematic and detailed",
-          "Use Kling 4.0 to create a 5-second cinematic video: a mecha crashes down, blasting rubble as the camera rushes in.",
-          "Use Kling 4.0 to create a 15-second sneaker ad: street action, product close-ups, and a detailed final hero shot."
+          "用可灵一次生成 3 张连续组图：同一只穿复古宇航服的小熊猫从空间站出舱、掠过舷窗、转身望向地球。",
+          "用可灵 4.0 生成 20 秒电影感视频：机甲战士从高空砸向地面，碎石与尘雾四散，镜头快速推近。",
+          "用可灵 4.0 Flash 以我的运动鞋商品图为首帧生成 20 秒、720p 视频。镜头缓慢绕鞋一周，最后停在鞋面特写。"
         ],
         "composerIcon": "./assets/kling-logo.svg",
         "logo": "./assets/kling-logo.svg",
