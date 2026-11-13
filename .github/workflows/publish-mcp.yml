@@ -1,0 +1,55 @@
+name: Publish Kling AI remote MCP metadata
+
+on:
+  workflow_dispatch:
+    inputs:
+      confirm_server_name:
+        description: 'Type io.github.klingai-dev/kling-ai to publish the reviewed server.json'
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  publish:
+    if: github.repository == 'klingai-dev/chatgpt-plugin' && github.ref == 'refs/heads/main' && inputs.confirm_server_name == 'io.github.klingai-dev/kling-ai'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    env:
+      MCP_PUBLISHER_VERSION: v1.8.1
+    steps:
+      - name: Checkout reviewed main
+        uses: actions/checkout@v5
+      - name: Check publishing identity and remote-only metadata
+        run: |
+          set -euo pipefail
+          jq -e '.name == "io.github.klingai-dev/kling-ai" and .version == "1.0.0" and (.packages == null) and .remotes == [{"type":"streamable-http","url":"https://kling.ai/mcp/plugin"}]' server.json
+      - name: Install cosign
+        uses: sigstore/cosign-installer@6f9f17788090df1f26f669e9d70d6ae9567deba6 # v4.1.2
+
+      - name: Download and verify mcp-publisher
+        run: |
+          set -euo pipefail
+          os="$(uname -s | tr '[:upper:]' '[:lower:]')"
+          arch="$(uname -m | sed 's/x86_64/amd64/;s/aarch64/arm64/')"
+          archive="mcp-publisher_${os}_${arch}.tar.gz"
+          base_url="https://github.com/modelcontextprotocol/registry/releases/download/${MCP_PUBLISHER_VERSION}"
+
+          curl --fail --location --silent --show-error --output "$archive" "$base_url/$archive"
+          curl --fail --location --silent --show-error --output "$archive.sigstore.json" "$base_url/$archive.sigstore.json"
+          cosign verify-blob \
+            --bundle "$archive.sigstore.json" \
+            --certificate-identity "https://github.com/modelcontextprotocol/registry/.github/workflows/release.yml@refs/tags/${MCP_PUBLISHER_VERSION}" \
+            --certificate-oidc-issuer "https://token.actions.githubusercontent.com" \
+            "$archive"
+          tar xzf "$archive" mcp-publisher
+          rm -f "$archive" "$archive.sigstore.json"
+
+      - name: Authenticate to MCP Registry
+        run: ./mcp-publisher login github-oidc
+
+      - name: Publish server metadata
+        run: ./mcp-publisher publish

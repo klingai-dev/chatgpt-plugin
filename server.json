@@ -1,0 +1,14 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.klingai-dev/kling-ai",
+  "title": "Kling AI",
+  "description": "Generate images and videos with Kling AI through a remote MCP server using OAuth authorization.",
+  "version": "1.0.0",
+  "websiteUrl": "https://kling.ai/app/mcp/guide",
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://kling.ai/mcp/plugin"
+    }
+  ]
+}
