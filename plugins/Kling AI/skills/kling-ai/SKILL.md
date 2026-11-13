@@ -44,7 +44,7 @@ Use the user's language. When the account is known to be disconnected, a suitabl
 
 - Discover the full tool schemas through the host. Read all relevant pages before concluding a tool is absent. Compare `text_to_video` and `omni_ref_video` for text-driven video, and `image_to_video` and `omni_ref_video` for image-driven video, when present. Consider the tool named by the user and use `motion_control` for motion transfer.
 - Query `who_am_i` for all relevant candidates. Use the `tools` filter only when declared by its live schema. Use only model names or aliases returned for the chosen tool and account. If the connection check already returned the relevant definitions, reuse them while current.
-- Match the user's model restriction, output settings, sound, shot requirements, and reference roles to the same tool/model pair before ranking candidates or uploading media. Recommend V4 only when live discovery returns a compatible Kling 4.0 pair. Use a compatible live default if other models are allowed. When no pair fits, report the unmet requirement and stop. If discovery fails, resolve the actual connection or tool-loading issue first.
+- Match the user's model restriction, output settings, sound, shot requirements, and reference roles to the same tool/model pair before ranking candidates or uploading media. Match Kling 4.0 and Kling 4.0 Flash by their full model names or declared aliases. When no pair fits, report the unmet requirement and stop. If discovery fails, resolve the actual connection or tool-loading issue first.
 
 ## Billing and single submission
 
@@ -53,7 +53,7 @@ Use the user's language. When the account is known to be disconnected, a suitabl
 - Immediately before each paid generation call, including `text_to_image` and `image_to_image`, use `query_membership_and_credits` on the same connection. Pause if the current balance is unavailable, nonpositive, or insufficient for a live estimate of the same settings. Keep the request in the current chat and follow the [top-up workflow](references/tool-workflows.md#resuming-after-a-top-up) for insufficient credits. A positive balance alone cannot establish affordability when the service returns no estimate.
 - Submit at most once per explicit generation request, including a rejected attempt. Any retry requires fresh authorization.
 - With a known `generationId`, use only `query_tasks` for status. If a submission leaves no known ID, report the returned error and any unknown creation or billing state, then stop. Do not call or offer `query_tasks` without an ID. It cannot list task history or recover a task by `taskTraceId`. A balance check or missing history entry cannot establish whether the submission succeeded or consumed credits.
-- Report the returned status, known task ID, and effective submitted settings when known. Report completion only when the task and relevant output succeeded and a usable media URL is available. Keep submission count separate from charged credits. Report an actual charge only from a returned charged amount such as `creditsConsumed`. Describe output quality and sound only if inspected.
+- Report the returned status, known task ID, and effective submitted settings when known. Follow [task status and results](references/tool-workflows.md#task-status-and-results) to confirm the type and count of usable outputs before reporting completion. Keep submission count separate from charged credits. Report an actual charge only from a returned charged amount such as `creditsConsumed`. Describe output quality and sound only if inspected.
 
 Read [tool workflows](references/tool-workflows.md), the [MCP contract](references/mcp-contract.md), and [asset workflows](references/asset-workflows.md) before generation, Element management, motion-library use, or local media preparation. Read [troubleshooting](references/troubleshooting.md) after an authorization, schema, upload, or provider failure.
 
@@ -74,7 +74,8 @@ Read [tool workflows](references/tool-workflows.md), the [MCP contract](referenc
 
 Apply these defaults only during generation preparation, when the user did not specify another choice and the live schema supports them.
 
-- Model: prefer a full-quality model compatible with the requested mode and references. Prefer Turbo, fast, or low-cost models only when the user explicitly prioritizes drafts, speed, or credit savings.
+- Image model: prefer the selected tool's live `defaultModel` when it supports the request. If the user explicitly requests the default, validate the request against that model's live capabilities and explain any unsupported settings. Otherwise, choose another compatible model when the default does not fit.
+- Video model: prefer a compatible Kling 4.0 model on `omni_ref_video` when the user leaves the model open. If it does not fit, use a compatible live default or another compatible full-quality model. Prefer Flash or another speed-focused or low-cost model when the user prioritizes drafts, speed, or credit savings and the model fits the request.
 - Image resolution: prefer `2k` for normal delivery, `4k` for commercial work, advertising, fine materials, or crop-heavy post-production, and `1k` only for drafts or speed. Never lower a higher live default.
 - Video resolution: prefer `1080p` for normal delivery and `4k` for supported commercial, large-screen, or post-production work. Use `720p` for drafts, speed, cost, or model limitations. Never lower a higher live default.
 - Output count: generate one result unless the user requests more.
@@ -87,6 +88,7 @@ Read [prompt construction](references/prompt-construction.md) to review or write
 
 - Use `text_to_image` for a new image. Use `image_to_image` when source media controls identity, product structure, composition, editable content, or style. An attachment alone does not determine the mode.
 - Resolve missing requirements that materially affect the result: subject, destination and aspect ratio, required copy, reference roles, protected facts, or output count.
+- For a connected image series, require explicit series support and the requested count in one task, even when a model can return multiple outputs. Set the declared count and series controls when available. Explain the limitation if no eligible model supports it.
 - Upload local images when needed and bind them to the selected model's declared slots, including `image_1` when required. Use the schema's exact `inputType` value, including uppercase `URL` when declared. If an upload fails, explain the problem; do not switch to text-to-image without the user's agreement.
 - Text-to-image does not use Elements. Before using an Element with image-to-image, follow [asset workflows](references/asset-workflows.md#using-elements-in-generation), call `element_get`, and choose a model whose live schema supports `elements`. Bind the exact ID in both the prompt and structured `elements` argument.
 - State every reference image's role. For edits and variations, apply the requested changes and preserve other details; for a comparison that varies one feature, keep the rest consistent.

@@ -21,7 +21,7 @@
   "interface": {
     "displayName": "Kling AI",
     "shortDescription": "Create images and videos",
-    "longDescription": "Turn every idea into a striking image or video. Kling AI is an AI image and video generator for creators. In WorkBuddy, use natural language for text-to-image, image-to-image, text-to-video, image-to-video, and single-shot or multi-shot video. Create posters, illustrations, portraits, product photos, e-commerce hero images, product listing images, product detail images, ad creatives, product showcase videos, marketing clips, e-commerce short videos, social media videos, and cinematic content for Taobao, Tmall, JD.com, Pinduoduo, Douyin, Kuaishou, Xiaohongshu, TikTok, Amazon, Shopify, and more. Upload reference images, check remaining credits, submit generation jobs, track progress, check task status, and download final images or videos. Looking for similar AI generators or alternatives like Hailuo AI, Seedance, Vidu, Jimeng, Runway, Pika, Sora, or Veo? Use Kling AI (KLING/ Kling /可灵)to build a high-quality Kling MCP creative workflow.",
+    "longDescription": "Generate images and connected image series, edit reference images, and create videos with Kling AI (可灵AI). Create product photos, posters, portraits, social media content, and videos with one or more shots. Kling 4.0 supports text-to-video, image-to-video with first, last, and intermediate keyframes, and Omni-Ref with images, videos, audio, and reusable subjects (Elements). It produces 3–30 second videos at 720p, with 1080p available to eligible accounts. Kling 4.0 Flash is optimized for speed and produces 3–20 second videos at 720p from text, a single first-frame image, or Omni-Ref with images, videos, and Elements. Both Omni-Ref models support smart shot splitting and a choice between synchronized sound generation and source-video sound retention. Use models with motion control to transfer a saved motion or a reference video to a subject image. Upload reference images, videos, and audio, manage Elements, browse the motion library, check your credit balance, and track generation progress. A connected Kling AI account is required. Generation uses Kling AI credits. Model availability and supported settings vary by account.",
     "developerName": "Kling AI",
     "category": "Creativity",
     "capabilities": [
@@ -33,9 +33,9 @@
     "privacyPolicyURL": "https://kling.ai/docs/privacy-policy",
     "termsOfServiceURL": "https://kling.ai/docs/user-policy",
     "defaultPrompt": [
-      "Create a 5-second cinematic clip: a mecha warrior crashes from the sky, blasting rocks and dust as the camera rapidly pushes in.",
-      "Create a 15-second sneaker ad: open with a street hook, cut to close-ups and on-foot action, then end on a shoe detail close-up.",
-      "Draw a red panda in a vintage spacesuit by a space station window, Earth\u2019s blue glow on its face, richly detailed and cinematic."
+      "Create 3 images as one series: a red panda in a vintage spacesuit exits a space station, passes a window, and looks at Earth.",
+      "Use Kling 4.0 for a 20s cinematic clip: a mech slams down, sending rubble and dust flying as the camera rushes in.",
+      "Use Kling 4.0 Flash for a 20s 720p clip. Start with my sneaker photo, slowly orbit the shoe, then close in on the upper."
     ],
     "composerIcon": "./assets/kling-logo.svg",
     "logo": "./assets/kling-logo.svg",

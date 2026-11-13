@@ -4,8 +4,10 @@ Generate images, edit reference images, and create videos with Kling AI in ChatG
 
 ## Capabilities
 
-- Generate and edit product photos, posters, portraits, cover images, and other visuals.
-- Create videos from text, images, or mixed references with Omni-Ref (全能参考), and use start and end frames or motion control when supported by the selected model.
+- Generate images from text, edit reference images, and create connected image series with a model that supports them. The plugin checks the current account for a compatible default image model.
+- **Kling 4.0** supports text-to-video, image-to-video with first, last, and intermediate keyframes, and Omni-Ref (全能参考) with images, video, audio, and Elements. It produces 3–30 second videos at 720p, with 1080p available to eligible accounts.
+- **Kling 4.0 Flash** is optimized for speed. It supports text-to-video, a single first-frame image, and Omni-Ref with images, video, and Elements. It produces 3–20 second videos at 720p.
+- Both Omni-Ref models support smart shot splitting. Choose either synchronized sound generation or source-video sound retention. Check the connected account for available models and settings.
 - Upload reference images, videos, and audio; save and reuse subjects as Elements; and browse saved motions.
 - Check account credits and generation progress. When the app supports the interactive result view, it shows progress and completed media there; otherwise, the assistant provides a result link.
 
@@ -36,13 +38,25 @@ Read-only account check:
 
 > Check my Kling AI connection and credit balance. Do not generate anything.
 
-Image generation:
+**Connected image series**
 
-> Create a 4:5 poster of a glass perfume bottle against a dark red studio background, with soft rim lighting. Leave room for text in the upper-right corner.
+> Create 3 images as one series: a red panda in a vintage spacesuit exits a space station, passes a window, and looks at Earth.
 
-Video generation:
+**Text-to-video with Kling 4.0**
 
-> Create a continuous 5-second, 16:9 shot outside a convenience store on a rainy night. A vintage motorcycle comes to a stop as the camera slowly moves closer.
+> Use Kling 4.0 for a 20s cinematic clip: a mech slams down, sending rubble and dust flying as the camera rushes in.
+
+**First-frame video with Kling 4.0 Flash**
+
+> Use Kling 4.0 Flash for a 20s 720p clip. Start with my sneaker photo, slowly orbit the shoe, then close in on the upper.
+
+**Motion library and motion control**
+
+> Preview saved motions, then apply the one I pick to my subject image to generate a motion-controlled video.
+
+**Reusable Element**
+
+> Save my character's front and side views as a reusable Element named Xiaobai.
 
 Task query:
 
