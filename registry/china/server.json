@@ -1,0 +1,28 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.klingai-dev/kling-ai-cn",
+  "title": "可灵 AI（中国区） / Kling AI (China)",
+  "description": "可灵 AI 中国区：通过 OAuth 连接国内账号，生成图片和视频、查询任务与积分。生成消耗该账号的积分。",
+  "version": "1.0.0",
+  "websiteUrl": "https://klingai.com",
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://klingai.com/mcp/plugin"
+    }
+  ],
+  "_meta": {
+    "io.modelcontextprotocol.registry/publisher-provided": {
+      "region": "china",
+      "authentication": "OAuth；请登录可灵 AI 中国区账号。",
+      "capabilities": [
+        "Image generation",
+        "Video generation",
+        "Generation task tracking",
+        "Account credit balance"
+      ],
+      "usage": "生成消耗已连接中国区账号的积分；可用模型和消耗以账号实际能力及服务返回为准。本条目不提供免费生成，也不承诺国内外积分互通。",
+      "regionalAlternative": "io.github.klingai-dev/kling-ai"
+    }
+  }
+}
