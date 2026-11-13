@@ -11,9 +11,9 @@ Use the remote MCP server bundled with this plugin: `https://klingai.com/mcp/plu
 
 Choose the deliverable for this turn before connecting or discovering models.
 
-- **Prompt or storyboard only.** Return the requested creative work. Preserve requirements such as copy space, reference roles, and shot timing. Read [prompt construction](references/prompt-construction.md) for image prompts or [motion and shots](references/motion-and-shots.md) for video plans as needed. Skip account checks, uploads, model selection, unsolicited generation settings, and invitations to generate.
+- **Prompt or storyboard only.** Use [prompt construction](references/prompt-construction.md) for image prompts or [motion and shots](references/motion-and-shots.md) for video prompts and storyboards. Review any supplied prompt before editing it. Preserve requirements such as copy space, reference roles, and shot timing. Return the requested creative work and skip account checks, uploads, model selection, unsolicited generation settings, and invitations to generate.
 - **Required asset missing.** Ask for the missing asset and explain its intended role, such as a product image for the first frame. End there. Skip unrelated questions, discovery, and uploads.
-- **Final settings for review.** Discover live capabilities and show the compatible settings, reference roles, and any required billing disclosure. Defer uploads unless the user also requests media preparation. Wait for authorization to submit.
+- **Final settings for review.** Discover live capabilities and use the relevant prompt guide when preparing a prompt. Show the compatible settings, reference roles, and any required billing disclosure. Defer uploads unless the user also requests media preparation. Wait for authorization to submit.
 - **Generate now.** Follow the [shared workflow](#workflow) and the relevant [image](#image-generation) or [video](#video-generation) guidance. Honor authorization already given for the same unsubmitted request and unchanged final settings.
 - **Top-up or resume.** Follow [resuming after a top-up](references/tool-workflows.md#resuming-after-a-top-up). A top-up update alone calls for a balance check. An explicit continuation request checks any existing task before preparing a new submission.
 - **Existing task status or missing result.** With a known `generationId`, follow the [status rules](references/tool-workflows.md#task-status-and-results). If the ID is unknown, ask for it. Skip model discovery and generation.
@@ -62,7 +62,7 @@ Read [tool workflows](references/tool-workflows.md), the [MCP contract](referenc
 1. Follow [request routing](#request-routing) and stop at the requested deliverable.
 2. For generation preparation, verify the connection and select a compatible pair through [model discovery](#model-discovery).
 3. For Element, motion-library, or upload requests, follow [asset workflows](references/asset-workflows.md); these operations do not implicitly create a generation task.
-4. Infer reasonable creative details from the brief; ask only about missing requirements that would materially change the result. Take models, fields, and supported values from the live schema.
+4. Follow the relevant prompt guide to review or write the prompt. Reuse a suitable user prompt verbatim and make only the edits needed for the request. Infer reasonable creative details from the brief and ask only about missing requirements that would materially change the result. Take models, fields, and supported values from the live schema.
 5. Once the pair is selected, upload required local media and bind the returned references as the live schema requires. Compare the actual request fields with the user's explicit requirements before submission.
 6. Follow [billing and single submission](#billing-and-single-submission) and preserve any returned `generationId` with the objective's `taskTraceId`.
 7. Follow [task status and results](references/tool-workflows.md#task-status-and-results). Let a displayed MCP App refresh progress. Without the App, track the same `generationId` at the provider-permitted interval.
@@ -83,29 +83,27 @@ Apply these defaults only during generation preparation, when the user did not s
 
 ## Image generation
 
-Read [prompt construction](references/prompt-construction.md) for reference images, exact copy, branded assets, or controlled variants. Read [image scene patterns](references/image-scene-patterns.md) for product, advertising, portrait, poster, or cover work.
+Read [prompt construction](references/prompt-construction.md) to review or write the prompt for each new image generation, edit, or variation. Read [image scene patterns](references/image-scene-patterns.md) for product, advertising, portrait, poster, or cover work.
 
 - Use `text_to_image` for a new image. Use `image_to_image` when source media controls identity, product structure, composition, editable content, or style. An attachment alone does not determine the mode.
 - Resolve missing requirements that materially affect the result: subject, destination and aspect ratio, required copy, reference roles, protected facts, or output count.
 - Upload local images when needed and bind them to the selected model's declared slots, including `image_1` when required. Use the schema's exact `inputType` value, including uppercase `URL` when declared. If an upload fails, explain the problem; do not switch to text-to-image without the user's agreement.
-- Build one prompt covering subject, action, environment, composition, lighting, color, materials, camera language, protected facts, and necessary exclusions.
 - Text-to-image does not use Elements. Before using an Element with image-to-image, follow [asset workflows](references/asset-workflows.md#using-elements-in-generation), call `element_get`, and choose a model whose live schema supports `elements`. Bind the exact ID in both the prompt and structured `elements` argument.
 - State every reference image's role. For edits and variations, apply the requested changes and preserve other details; for a comparison that varies one feature, keep the rest consistent.
-- Use `4:5` for portrait feeds when appropriate; otherwise follow the shared resolution, ratio, and output-count defaults. Unless the user requests generated text, prefer a clean image with intentional copy-safe space.
+- Use `4:5` for portrait feeds when appropriate; otherwise follow the shared resolution, ratio, and output-count defaults. When writing a new prompt for an image without text, prefer intentional copy-safe space.
 - Treat brand names, logos, faces, product structure, and user-provided copy as protected facts. Never invent performance, price, certification, ingredients, awards, effects, or statistics.
 
 Before the shared single-submission workflow, prepare the mode, model, prompt summary, resolution, ratio, output count, and reference roles. Check focal subject, visual hierarchy, safe area, lighting, and conflicting instructions. Claim visual QA only when the result was actually inspected.
 
 ## Video generation
 
-Read [video model fit and Omni-Ref](references/omni-video.md) before selecting a video pair, especially for sound, shot control, and references. Read [motion and shots](references/motion-and-shots.md) for camera direction, continuity, multi-beat timing, or reference media, and [video scene patterns](references/video-scene-patterns.md) for product, advertising, social, or cinematic work.
+Read [video model fit and Omni-Ref](references/omni-video.md) before selecting a video pair, especially for sound, shot control, and references. Read [motion and shots](references/motion-and-shots.md) to review or write the prompt for each new video generation, edit, or variation. Read [video scene patterns](references/video-scene-patterns.md) for product, advertising, social, or cinematic work.
 
 - Resolve missing requirements that materially affect the result: destination and aspect ratio, duration, required references, protected facts, narration or copy, or shot structure.
 - Preserve each reference role when selecting and binding inputs. A required first frame needs a first-frame input. If an upload fails, explain the problem and stop before submission.
 - Validate explicit specifications such as `1080p` against the selected tool and model's live resolution enum and conditions before submission.
-- Build a motion-first prompt covering opening composition, subject action, camera movement, environmental motion, timing, continuity, protected facts, light, materials, and necessary exclusions.
 - Pass only reference roles supported by the selected model's live schema. For Elements, the motion library, or motion control, follow [asset workflows](references/asset-workflows.md). Motion control requires a subject image and exactly one motion source: a motion-library ID or a source video. Validate motion direction and duration.
-- Use one primary camera movement in a five-second shot. Use multiple shots only when location, time, scale, or information state changes. A multi-shot plan is one video task; do not submit one generation per shot without explicit approval for separate tasks.
+- When planning shots, default to one primary camera movement in a five-second shot. Use multiple shots when requested or when location, time, scale, or information state changes. A multi-shot plan is one video task; do not submit one generation per shot without explicit approval for separate tasks.
 - Do not add unrequested narration, readable text, extra characters, product claims, prices, endorsements, or certifications.
 
 Before the shared single-submission workflow, prepare the mode, model, prompt summary, duration, resolution, ratio, output count, shot structure, and reference roles. Check that the action fits the duration, camera instructions agree, subjects remain consistent across shots, and shot durations add up to the total. Claim a visual review only when the result was actually inspected.

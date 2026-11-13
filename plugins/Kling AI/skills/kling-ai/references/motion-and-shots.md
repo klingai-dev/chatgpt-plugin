@@ -1,6 +1,15 @@
 # Motion and shot planning
 
+## Review a supplied prompt
+
+- Honor requests to use the prompt verbatim. Otherwise, check the subject, action, camera, pacing, continuity, and constraints that matter for this clip. Details the user leaves to the model can stay open.
+- If the prompt is clear, consistent, and sufficient for the requested result, return or submit it verbatim. Apply the same check to a general request to optimize the prompt.
+- Resolve material gaps, ambiguity, or conflicts from the brief and references first. Ask only when the user's intent is still unclear and would materially affect the result.
+- Edit only the words needed to resolve the issue, apply the requested change, or satisfy required reference syntax. When the user supplies a line that fits as written, append it verbatim and preserve the rest. For an ending beat, use the requested action, timing, and final position or state. Leave the intervening motion to the model unless the user specifies it.
+
 ## Motion-first prompt order
+
+For a new prompt or a targeted addition, prioritize action and continuity. Use visible details such as lighting, material, depth of field, and composition to express abstract quality requests when they matter to the shot.
 
 1. Format and duration intent.
 2. Opening frame and subject position.
@@ -22,7 +31,7 @@
 - Handheld follow: urgency or UGC realism; specify the intended stability.
 - Whip pan: use only for a deliberate transition and name the final landing subject.
 
-Do not stack multiple camera-movement verbs into one five-second shot.
+When planning a five-second shot, default to one primary camera movement.
 
 For continuous hand-object interaction, frame the action path so the hands and object stay visible through the final handoff or placement.
 
