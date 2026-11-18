@@ -32,6 +32,10 @@ Assign roles before writing the creative prompt. Identity, product structure, co
 - When the user chooses to add text in post-production, leave space for the planned copy in a text-free base image.
 - When the user requests generated text, use the exact copy and follow any specified placement, hierarchy, language, or styling. For a title-only edit, add just the requested title and preserve existing labels. Restrict other text only when the user requests it. Check spelling and layout if you can inspect the result.
 
+## Connected image series
+
+When drafting or clarifying a series prompt, describe the shared subject and visual style once, then list one distinct beat per image in order. Specify which identity, wardrobe, design, or lighting details should carry across the set. Use separate images unless the user asks for a grid or collage.
+
 ## Controlled variants
 
 Apply all requested changes and preserve the other details. For comparisons designed to isolate one feature, vary only that feature: concept, framing, composition, mood, color, expression, or action. Do not replace a clear creative request with a batch of near-duplicates.

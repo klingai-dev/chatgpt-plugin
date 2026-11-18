@@ -4,7 +4,7 @@ Generate images, edit reference images, and create videos with Kling AI in ChatG
 
 ## Capabilities
 
-- Generate images from text, edit reference images, and create connected image series with a model that supports them. The plugin checks the current account for a compatible default image model.
+- **[Kling Image 4.0](https://kling.ai/quickstart/kling-image-4-user-guide)** generates images from text, edits reference images, and creates connected image series, with native resolution up to 8K. Check the connected account for available resolutions and series lengths; limits in the plugin can differ from those on the website.
 - **Kling 4.0** supports text-to-video, image-to-video with first, last, and intermediate keyframes, and Omni-Ref (全能参考) with images, video, audio, and Elements. It produces 3–30 second videos at 720p, with 1080p available to eligible accounts.
 - **Kling 4.0 Flash** is optimized for speed. It supports text-to-video, a single first-frame image, and Omni-Ref with images, video, and Elements. It produces 3–20 second videos at 720p.
 - Both Omni-Ref models support smart shot splitting. Choose either synchronized sound generation or source-video sound retention. Check the connected account for available models and settings.
@@ -38,25 +38,25 @@ Read-only account check:
 
 > Check my Kling AI connection and credit balance. Do not generate anything.
 
-**Connected image series**
+**Kling Image 4.0 image series**
 
-> Create 3 images as one series: a red panda in a vintage spacesuit exits a space station, passes a window, and looks at Earth.
+> Kling Image 4.0: 3 linked 8K images of one red panda in a retro spacesuit: exit the station, pass a window, face blue Earth.
 
 **Text-to-video with Kling 4.0**
 
-> Use Kling 4.0 for a 20s cinematic clip: a mech slams down, sending rubble and dust flying as the camera rushes in.
+> Kling 4.0, 20s cinematic clip: a mech slams down from the sky. A shockwave scatters rocks and dust as the camera rushes in.
 
 **First-frame video with Kling 4.0 Flash**
 
-> Use Kling 4.0 Flash for a 20s 720p clip. Start with my sneaker photo, slowly orbit the shoe, then close in on the upper.
+> Kling 4.0 Flash, 20s at 720p: start with my sneaker photo, slowly orbit the shoe, and end on a close-up of the upper.
 
 **Motion library and motion control**
 
-> Preview saved motions, then apply the one I pick to my subject image to generate a motion-controlled video.
+> Show and preview my saved motions in Kling AI. After I pick one, use an available motion control model to apply it to my subject image and generate a video.
 
 **Reusable Element**
 
-> Save my character's front and side views as a reusable Element named Xiaobai.
+> Save my character’s front and side views in Kling AI as my first reusable Element, named Xiaobai, to keep the character consistent in future projects.
 
 Task query:
 
