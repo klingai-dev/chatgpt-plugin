@@ -4,7 +4,7 @@ Generate images, edit reference images, and create videos with Kling AI in ChatG
 
 ## Capabilities
 
-- Generate images from text, edit reference images, and create connected image series with a model that supports them. The plugin checks the current account for a compatible default image model.
+- **[Kling Image 4.0](https://kling.ai/quickstart/kling-image-4-user-guide)** generates images from text, edits reference images, and creates connected image series, with native resolution up to 8K. Check the connected account for available resolutions and series lengths; limits in the plugin can differ from those on the website.
 - **Kling 4.0** supports text-to-video, image-to-video with first, last, and intermediate keyframes, and Omni-Ref (全能参考) with images, video, audio, and Elements. It produces 3–30 second videos at 720p, with 1080p available to eligible accounts.
 - **Kling 4.0 Flash** is optimized for speed. It supports text-to-video, a single first-frame image, and Omni-Ref with images, video, and Elements. It produces 3–20 second videos at 720p.
 - Both Omni-Ref models support smart shot splitting. Choose either synchronized sound generation or source-video sound retention. Check the connected account for available models and settings.
@@ -38,25 +38,25 @@ Read-only account check:
 
 > Check my Kling AI connection and credit balance. Do not generate anything.
 
-**连续组图**
+**可灵图片 4.0 连续组图**
 
-> 用可灵一次生成 3 张连续组图：同一只穿复古宇航服的小熊猫从空间站出舱、掠过舷窗、转身望向地球。
+> 使用可灵图片 4.0 一次生成 3 张 8K 连续组图：同一只身穿复古宇航服的小熊猫依次从空间站出舱、掠过舷窗、转身望向蓝色地球。
 
 **可灵 4.0 文生视频**
 
-> 用可灵 4.0 生成 20 秒电影感视频：机甲战士从高空砸向地面，碎石与尘雾四散，镜头快速推近。
+> 使用可灵 4.0 生成一段 20 秒电影感视频：机甲战士从高空重砸地面，冲击波瞬间震开碎石与尘雾，镜头快速推近，充满力量感。
 
 **可灵 4.0 Flash 首帧图生视频**
 
-> 用可灵 4.0 Flash 以我的运动鞋商品图为首帧生成 20 秒、720p 视频。镜头缓慢绕鞋一周，最后停在鞋面特写。
+> 使用可灵 4.0 Flash，把我提供的运动鞋商品图作为首帧，生成一段 20 秒、720p 的视频。镜头缓慢绕过鞋身，最后停在鞋面细节上。
 
 **动作库与动作控制**
 
-> 预览动作库里已保存的动作。等我选定后，把这个动作应用到我的主体图上生成视频。
+> 使用可灵 AI 查看动作库并预览已保存的动作。等我选定后，用可用的动作控制模型将该动作应用到我提供的主体图片，生成视频。
 
 **可复用主体**
 
-> 把我的角色正面图和侧面图保存为名叫「小白」的可复用主体，供后续创作使用。
+> 使用可灵 AI 将我提供的角色正面图和侧面图保存为我的第一个可复用主体，命名为「小白」，方便后续创作时保持角色一致。
 
 Task query:
 

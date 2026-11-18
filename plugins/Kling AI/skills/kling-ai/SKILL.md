@@ -44,7 +44,7 @@ Use the user's language. When the account is known to be disconnected, a suitabl
 
 - Discover the full tool schemas through the host. Read all relevant pages before concluding a tool is absent. Compare `text_to_video` and `omni_ref_video` for text-driven video, and `image_to_video` and `omni_ref_video` for image-driven video, when present. Consider the tool named by the user and use `motion_control` for motion transfer.
 - Query `who_am_i` for all relevant candidates. Use the `tools` filter only when declared by its live schema. Use only model names or aliases returned for the chosen tool and account. If the connection check already returned the relevant definitions, reuse them while current.
-- Match the user's model restriction, output settings, sound, shot requirements, and reference roles to the same tool/model pair before ranking candidates or uploading media. Match Kling 4.0 and Kling 4.0 Flash by their full model names or declared aliases. When no pair fits, report the unmet requirement and stop. If discovery fails, resolve the actual connection or tool-loading issue first.
+- Match the user's model restriction, output settings, sound, shot requirements, and reference roles to the same tool/model pair before ranking candidates or uploading media. Match Kling Image 4.0, Kling 4.0, and Kling 4.0 Flash by their full model names or declared aliases. When no pair fits, report the unmet requirement and stop. If discovery fails, resolve the actual connection or tool-loading issue first.
 
 ## Billing and single submission
 
@@ -88,7 +88,8 @@ Read [prompt construction](references/prompt-construction.md) to review or write
 
 - Use `text_to_image` for a new image. Use `image_to_image` when source media controls identity, product structure, composition, editable content, or style. An attachment alone does not determine the mode.
 - Resolve missing requirements that materially affect the result: subject, destination and aspect ratio, required copy, reference roles, protected facts, or output count.
-- For a connected image series, require explicit series support and the requested count in one task, even when a model can return multiple outputs. Set the declared count and series controls when available. Explain the limitation if no eligible model supports it.
+- For a connected image series, require explicit series support and the requested count in one task. A batch of variants of one composition is a different mode. Use the live limits and explain any unsupported requirement before submission.
+- For Kling Image 4.0, look for `kling-image-v4_0` in `who_am_i` on the appropriate image tool. For a three-image 8K series, bind `story_mode=true`, `imageCount=3`, and `img_resolution=8k` as structured arguments when the same live model declares that combination. Use the model’s own count rules; some older series modes infer the count from the prompt.
 - Upload local images when needed and bind them to the selected model's declared slots, including `image_1` when required. Use the schema's exact `inputType` value, including uppercase `URL` when declared. If an upload fails, explain the problem; do not switch to text-to-image without the user's agreement.
 - Text-to-image does not use Elements. Before using an Element with image-to-image, follow [asset workflows](references/asset-workflows.md#using-elements-in-generation), call `element_get`, and choose a model whose live schema supports `elements`. Bind the exact ID in both the prompt and structured `elements` argument.
 - State every reference image's role. For edits and variations, apply the requested changes and preserve other details; for a comparison that varies one feature, keep the rest consistent.
