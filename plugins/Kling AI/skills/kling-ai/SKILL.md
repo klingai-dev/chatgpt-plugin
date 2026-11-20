@@ -1,6 +1,6 @@
 ---
 name: kling-ai
-description: Write Kling AI (可灵) prompts and storyboards, prepare generation settings, or generate and edit images and videos in ChatGPT and Codex. Use for Omni-Ref (全能参考), keyframes, motion control, required reference media, Elements, uploads, task status, credits, and account connection.
+description: Write Kling AI (可灵) prompts and storyboards, prepare generation settings, or generate and edit images and videos in ChatGPT and Codex. Use for HDR video (高动态范围), Omni-Ref (全能参考), keyframes, motion control, required reference media, Elements, uploads, task status, credits, and account connection.
 ---
 
 # Kling AI
@@ -105,6 +105,7 @@ Read [video model fit and Omni-Ref](references/omni-video.md) before selecting a
 - Resolve missing requirements that materially affect the result: destination and aspect ratio, duration, required references, protected facts, narration or copy, or shot structure.
 - Preserve each reference role when selecting and binding inputs. A required first frame needs a first-frame input. If an upload fails, explain the problem and stop before submission.
 - Validate explicit specifications such as `1080p` against the selected tool and model's live resolution enum and conditions before submission.
+- For HDR video, follow the [HDR output rules](references/omni-video.md#hdr-output). Validate the `hdr` and `resolution` combination on the selected tool and model, bind both as structured arguments, and include HDR in the settings shown before submission.
 - Pass only reference roles supported by the selected model's live schema. For Elements, the motion library, or motion control, follow [asset workflows](references/asset-workflows.md). Motion control requires a subject image and exactly one motion source: a motion-library ID or a source video. Validate motion direction and duration.
 - When planning shots, default to one primary camera movement in a five-second shot. Use multiple shots when requested or when location, time, scale, or information state changes. A multi-shot plan is one video task; do not submit one generation per shot without explicit approval for separate tasks.
 - Do not add unrequested narration, readable text, extra characters, product claims, prices, endorsements, or certifications.

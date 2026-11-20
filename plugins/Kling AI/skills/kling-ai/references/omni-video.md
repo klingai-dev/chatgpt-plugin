@@ -5,8 +5,15 @@ Compare compatible dedicated video and Omni-Ref tools using the [live discovery 
 ## Kling 4.0 and Kling 4.0 Flash
 
 - Match a named model to the complete name or alias in the account's live discovery results. Confirm that the selected tool and model support the requested settings.
-- Kling 4.0 supports first, last, and intermediate keyframes for image-to-video, and Omni-Ref with images, videos, audio, and Elements. Its documented duration is 3–30 seconds at 720p, with 1080p for eligible accounts.
+- Kling 4.0 supports first, last, and intermediate keyframes for image-to-video, and Omni-Ref with images, videos, audio, and Elements. It supports 3–30 seconds at 720p, with 1080p and 4K for eligible accounts.
 - Kling 4.0 Flash uses a single first frame for image-to-video and supports Omni-Ref with images, videos, and Elements. Its documented duration is 3–20 seconds at 720p. For a separate audio reference, use Kling 4.0 Omni-Ref when its live schema exposes an audio input slot.
+
+## HDR output
+
+- Call `who_am_i` and inspect the relevant `text_to_video`, `image_to_video`, or `omni_ref_video` model. Use standard Kling 4.0 (`kling-video-v4_0`) when the live model declares HDR at the requested resolution and the account meets any stated access conditions.
+- For 4K HDR, put both `{"name":"hdr","value":"hdr"}` and `{"name":"resolution","value":"4k"}` in `arguments`. Use `1080p` as the resolution value for 1080p HDR. The default HDR mode is `none`, so either resolution alone leaves HDR off. If the user requests HDR without a resolution, apply the video quality defaults among supported HDR resolutions.
+- HDR requires 1080p or 4K. Kling 4.0 Flash is limited to 720p SDR. If the requested settings conflict or the connected account does not expose the combination, explain the limit before submission and let the user choose any change.
+- If a video supplied for Omni-Ref or editing is known to be HDR, ask for an SDR copy before using it as an input.
 
 ## Sound and shot requirements
 

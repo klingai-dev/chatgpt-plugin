@@ -5,7 +5,7 @@ Generate images, edit reference images, and create videos with Kling AI in ChatG
 ## Capabilities
 
 - **[Kling Image 4.0](https://kling.ai/quickstart/kling-image-4-user-guide)** generates images from text, edits reference images, and creates connected image series, with native resolution up to 8K. Check the connected account for available resolutions and series lengths; limits in the plugin can differ from those on the website.
-- **Kling 4.0** supports text-to-video, image-to-video with first, last, and intermediate keyframes, and Omni-Ref (全能参考) with images, video, audio, and Elements. It produces 3–30 second videos at 720p, with 1080p available to eligible accounts.
+- **Kling 4.0** supports text-to-video, image-to-video with first, last, and intermediate keyframes, and Omni-Ref (全能参考) with images, video, audio, and Elements. It produces 3–30 second videos at 720p. Eligible accounts can request 1080p or 4K with optional HDR when supported by the connected model.
 - **Kling 4.0 Flash** is optimized for speed. It supports text-to-video, a single first-frame image, and Omni-Ref with images, video, and Elements. It produces 3–20 second videos at 720p.
 - Both Omni-Ref models support smart shot splitting. Choose either synchronized sound generation or source-video sound retention. Check the connected account for available models and settings.
 - Upload reference images, videos, and audio; save and reuse subjects as Elements; and browse saved motions.
@@ -45,6 +45,10 @@ Read-only account check:
 **可灵 4.0 文生视频**
 
 > 使用可灵 4.0 生成一段 20 秒电影感视频：机甲战士从高空重砸地面，冲击波瞬间震开碎石与尘雾，镜头快速推近，充满力量感。
+
+**可灵 4.0 HDR 视频**
+
+> 使用可灵 4.0 生成一段 5 秒的 4K HDR 视频。阳光穿过云层落在海面上，镜头保持静止，光影随海浪流动。
 
 **可灵 4.0 Flash 首帧图生视频**
 
