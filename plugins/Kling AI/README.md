@@ -5,7 +5,7 @@ Generate images, edit reference images, and create videos with Kling AI in ChatG
 ## Capabilities
 
 - **[Kling Image 4.0](https://kling.ai/quickstart/kling-image-4-user-guide)** generates images from text, edits reference images, and creates connected image series, with native resolution up to 8K. Check the connected account for available resolutions and series lengths; limits in the plugin can differ from those on the website.
-- **Kling 4.0** supports text-to-video, image-to-video with first, last, and intermediate keyframes, and Omni-Ref (全能参考) with images, video, audio, and Elements. It produces 3–30 second videos at 720p, with 1080p available to eligible accounts.
+- **Kling 4.0** supports text-to-video, image-to-video with first, last, and intermediate keyframes, and Omni-Ref (全能参考) with images, video, audio, and Elements. It produces 3–30 second videos at 720p. Eligible accounts can request 1080p or 4K with optional HDR when supported by the connected model.
 - **Kling 4.0 Flash** is optimized for speed. It supports text-to-video, a single first-frame image, and Omni-Ref with images, video, and Elements. It produces 3–20 second videos at 720p.
 - Both Omni-Ref models support smart shot splitting. Choose either synchronized sound generation or source-video sound retention. Check the connected account for available models and settings.
 - Upload reference images, videos, and audio; save and reuse subjects as Elements; and browse saved motions.
@@ -45,6 +45,10 @@ Read-only account check:
 **Text-to-video with Kling 4.0**
 
 > Kling 4.0, 20s cinematic clip: a mech slams down from the sky. A shockwave scatters rocks and dust as the camera rushes in.
+
+**HDR video with Kling 4.0**
+
+> Use Kling 4.0 to generate a 5-second 4K HDR video of sunlight breaking through clouds over the ocean. Keep the camera still as the light moves across the waves.
 
 **First-frame video with Kling 4.0 Flash**
 

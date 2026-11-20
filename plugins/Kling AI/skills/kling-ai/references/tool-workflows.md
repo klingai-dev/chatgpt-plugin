@@ -23,6 +23,7 @@
 - If a refresh fails or tracking ends before completion, return the task ID and the latest confirmed state. Say when the refresh failed. Report the state as unconfirmed only when no state has ever been confirmed. A query failure leaves the original submission in place.
 - Report full completion only when the task succeeds and usable outputs meet the requested type and count. Count a work only if it has usable primary media and its status, when supplied, is successful. If a successful task returns fewer usable outputs than requested, report the actual count, such as 2 of 3 images, and deliver the available works. If it returns none, report the missing result and keep the task ID.
 - Use the displayed MCP App to preview results. Without it, return one usable primary media link per successful output.
+- For HDR output outside the App, use the original video at `works[].url` when available. Confirm the delivered HDR format from explicit service metadata or the original file's color metadata. If neither confirms the format, report HDR as a submitted setting.
 
 ## Read-only operations
 
