@@ -34,7 +34,7 @@ After installation, follow Codex's connection prompt to authorize your Kling AI 
 ### ChatGPT on the web
 
 1. Open [ChatGPT Plugins](https://chatgpt.com/plugins), select **+**, then **Add custom MCP server**. Availability depends on your account and workspace settings. In some versions, the entry is under **Settings → Plugins → Create**.
-2. Name it `Kling AI`, enter `https://kling.ai/mcp` as the server URL, and select **OAuth**.
+2. Name it `Kling AI`, enter `https://kling.ai/mcp/plugin` as the server URL, and select **OAuth**.
 3. Review the prompt, create the plugin, and authorize your Kling AI Global account. In a new chat, use `@` to select **Kling AI**. [OpenAI custom MCP setup](https://developers.openai.com/plugins/deploy/connect-chatgpt#add-the-mcp-server)
 
 ### VS Code and GitHub Copilot
