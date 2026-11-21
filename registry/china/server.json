@@ -4,7 +4,7 @@
   "title": "可灵 AI 中国区 · Kling AI China Plugin",
   "description": "Official Kling AI China Plugin for image and video generation via OAuth.",
   "version": "1.0.1",
-  "websiteUrl": "https://klingai.com",
+  "websiteUrl": "https://klingai.com/app/mcp/guide",
   "remotes": [
     {
       "type": "streamable-http",
