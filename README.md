@@ -33,7 +33,7 @@ codex plugin add kling-ai@kling-ai
 ### ChatGPT 网页端
 
 1. 打开 [ChatGPT 插件页](https://chatgpt.com/plugins)，点击 **+ → 添加自定义 MCP 服务器**。是否能添加取决于账号和工作区设置。部分界面的入口为 **设置 → 插件 → 创建**。
-2. 名称填 `Kling AI`，服务器 URL 填 `https://klingai.com/mcp`，认证方式选 **OAuth**。
+2. 名称填 `Kling AI`，服务器 URL 填 `https://klingai.com/mcp/plugin`，认证方式选 **OAuth**。
 3. 阅读页面提示并创建，使用中国区可灵账号完成授权。在新对话中通过 `@` 选择 **Kling AI**。[OpenAI 自定义 MCP 配置说明](https://developers.openai.com/plugins/deploy/connect-chatgpt#add-the-mcp-server)
 
 ## 检查连接并开始创作
