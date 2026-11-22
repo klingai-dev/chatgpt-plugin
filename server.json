@@ -2,7 +2,7 @@
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "io.github.klingai-dev/kling-ai",
   "title": "Kling AI Global Plugin",
-  "description": "Official Kling AI Global Plugin for image and video generation via OAuth.",
+  "description": "Official Kling AI Global Remote MCP Plugin. OAuth sign-in enables image creation and editing, video generation, motion control, reusable Elements, task tracking, and credit lookup. Generation consumes Global account credits; available models and options depend on live MCP tools.",
   "version": "1.0.2",
   "websiteUrl": "https://kling.ai/app/mcp/guide",
   "remotes": [
@@ -16,8 +16,10 @@
       "region": "global",
       "authentication": "OAuth; sign in to your Kling AI Global account.",
       "capabilities": [
-        "Image generation",
-        "Video generation",
+        "Text-to-image and image-to-image generation",
+        "Text-to-video and image-to-video generation",
+        "Motion control",
+        "Reusable Elements",
         "Generation task tracking",
         "Account credit balance"
       ],
