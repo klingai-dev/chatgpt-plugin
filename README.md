@@ -11,7 +11,7 @@ Generate images, edit reference images, create videos, and check credits and tas
 | ChatGPT on the web | [Add a custom MCP server](#chatgpt-on-the-web) |
 | VS Code with GitHub Copilot | [Install the regional MCP server](#vs-code-and-github-copilot) |
 
-Choose one setup method per client. [Official Kling MCP & CLI guide](https://kling.ai/app/mcp/guide)
+Choose one setup method per client. [Official Kling MCP & CLI guide](https://kling.ai/app/mcp/guide). Browse the independent [Global](https://mcp.tc/i/kling-ai) and [China](https://mcp.tc/i/kling-ai-china) MCP listings for client-specific setup links; OAuth authorization goes directly to Kling.
 
 ### ChatGPT and Codex desktop
 
