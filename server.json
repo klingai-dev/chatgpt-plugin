@@ -1,9 +1,9 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "io.github.klingai-dev/kling-ai",
-  "title": "Kling AI (Global)",
-  "description": "Generate images and videos with Kling AI Global via OAuth. Generation uses account credits.",
-  "version": "1.0.1",
+  "title": "Kling AI Global Plugin",
+  "description": "Official Kling Global MCP Plugin: image/video, motion, Elements, tasks and credits via OAuth.",
+  "version": "1.0.2",
   "websiteUrl": "https://kling.ai/app/mcp/guide",
   "remotes": [
     {
@@ -16,13 +16,19 @@
       "region": "global",
       "authentication": "OAuth; sign in to your Kling AI Global account.",
       "capabilities": [
-        "Image generation",
-        "Video generation",
+        "Text-to-image and image-to-image generation",
+        "Text-to-video and image-to-video generation",
+        "Motion control",
+        "Reusable Elements",
         "Generation task tracking",
         "Account credit balance"
       ],
       "usage": "Generation consumes credits from the connected regional Kling AI account. Available models and costs depend on that account. This listing does not grant free generation or transfer credits between regions.",
       "regionalAlternative": "io.github.klingai-dev/kling-ai-cn"
     }
+  },
+  "repository": {
+    "url": "https://github.com/klingai-tech/claude-plugin",
+    "source": "github"
   }
 }
