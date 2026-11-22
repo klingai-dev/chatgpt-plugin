@@ -9,8 +9,9 @@ Generate images, edit reference images, create videos, and check credits and tas
 | ChatGPT desktop in Work mode or Codex desktop | [Install the desktop plugin](#chatgpt-and-codex-desktop) |
 | Codex CLI | [Install the plugin from the terminal](#codex-cli) |
 | ChatGPT on the web | [Add a custom MCP server](#chatgpt-on-the-web) |
+| VS Code with GitHub Copilot | [Install the regional MCP server](#vs-code-and-github-copilot) |
 
-Choose one setup method per client. [Official Kling MCP & CLI guide](https://kling.ai/app/mcp/guide)
+Choose one setup method per client. [Official Kling MCP & CLI guide](https://kling.ai/app/mcp/guide). Browse the independent [Global](https://mcp.tc/i/kling-ai) and [China](https://mcp.tc/i/kling-ai-china) MCP listings for client-specific setup links; OAuth authorization goes directly to Kling.
 
 ### ChatGPT and Codex desktop
 
@@ -35,6 +36,15 @@ After installation, follow Codex's connection prompt to authorize your Kling AI 
 1. Open [ChatGPT Plugins](https://chatgpt.com/plugins), select **+**, then **Add custom MCP server**. Availability depends on your account and workspace settings. In some versions, the entry is under **Settings → Plugins → Create**.
 2. Name it `Kling AI`, enter `https://kling.ai/mcp/plugin` as the server URL, and select **OAuth**.
 3. Review the prompt, create the plugin, and authorize your Kling AI Global account. In a new chat, use `@` to select **Kling AI**. [OpenAI custom MCP setup](https://developers.openai.com/plugins/deploy/connect-chatgpt#add-the-mcp-server)
+
+### VS Code and GitHub Copilot
+
+Use the VS Code MCP gallery links to open the official regional entry, review its tools and permissions, and install it. Complete OAuth with the Kling account for the selected region. Generation uses credits from that account.
+
+- [Kling AI Global MCP](https://vscode.dev/redirect?url=vscode%3Amcp%2Fby-name%2Fio.github.klingai-dev%2Fkling-ai) — `https://kling.ai/mcp/plugin`
+- [可灵 AI 中国区 MCP](https://vscode.dev/redirect?url=vscode%3Amcp%2Fby-name%2Fio.github.klingai-dev%2Fkling-ai-cn) — `https://klingai.com/mcp/plugin`
+
+If the link does not open a gallery entry in your VS Code setup, run **Chat: Open Customizations**, choose **MCP Servers**, and add the matching HTTP endpoint directly. See Microsoft's [VS Code MCP setup guide](https://code.visualstudio.com/docs/agent-customization/mcp-servers).
 
 ## Check the connection and start creating
 
