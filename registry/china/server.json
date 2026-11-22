@@ -2,7 +2,7 @@
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "io.github.klingai-dev/kling-ai-cn",
   "title": "可灵 AI 中国区 · Kling AI China Plugin",
-  "description": "可灵 AI 中国区官方 Remote MCP Plugin。OAuth 登录后可生图、图生图、生成视频、动作控制、管理可复用主体 Elements、查询任务与积分。生成消耗中国区账号积分；可用模型和参数以实时 MCP 工具为准。",
+  "description": "可灵中国区 MCP Plugin：OAuth 图片/视频、动作、主体、任务与积分。",
   "version": "1.0.1",
   "websiteUrl": "https://klingai.com/app/mcp/guide",
   "remotes": [
