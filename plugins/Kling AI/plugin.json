@@ -5,9 +5,9 @@
   "description": "Generate and edit images, create videos from text and reference media, and check your Kling AI credits and generation progress.",
   "author": {
     "name": "Kling AI",
-    "url": "https://klingai.com"
+    "url": "https://kling.ai"
   },
-  "homepage": "https://klingai.com/app",
+  "homepage": "https://kling.ai/app",
   "license": "MIT",
   "keywords": [
     "Kling",
