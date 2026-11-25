@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "kling-ai",
-  "version": "1.0.0",
+  "version": "1.0.6",
   "description": "Generate and edit images, create videos from text and reference media, and check your Kling AI credits and generation progress.",
   "author": {
     "name": "Kling AI",
