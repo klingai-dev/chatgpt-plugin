@@ -5,9 +5,15 @@ description: Write Kling AI (可灵) prompts and storyboards, prepare generation
 
 # Kling AI
 
-Use the remote MCP server bundled with this plugin: `https://klingai.com/mcp/plugin`. This is the China endpoint. Keep the same endpoint for account switching; do not register a duplicate server or require a local MCP server.
+Use the remote MCP server bundled with this plugin: `https://kling-ai.prt.kuaishou.com/mcp`. This is the China endpoint. Keep the same endpoint for account switching; do not register a duplicate server or require a local MCP server.
 
 ## Request routing
+
+Before applying creative guidance, follow [creative workflow routing](references/workflow-routing.md) for every new objective, including prompt-only writing, storyboards, and advertising plans. First check submission state: query a known `generationId` on its original connection; an attempted submission without a confirmed ID remains blocked. Reuse an existing `direct`, `bundled`, or `remote` route and its package/version and stage for continuation. Only an explicit request to preserve a completed plan and skip creative workflows selects direct execution; a detailed prompt alone does not.
+
+Obtain the configured connection's complete tool declarations, including all pagination. A search miss, similar-tool result, truncated result, or incomplete declaration does not prove that `skill_catalog` is absent. If complete declarations cannot be obtained, preserve the request and report the limitation, then pause routing before bundled creative steps. For text-only work, use currently accessible discovery without initiating login or querying models/credits.
+
+A loaded remote package owns creative instructions and required file reads; stop applying bundled creative guidance and defaults for that objective. Direct execution preserves the original prompt and confirmed settings and performs only necessary execution checks. The creative steps and defaults below apply only to the bundled route. Routing does not authorize generation, uploads, or extra deliverables.
 
 Choose the deliverable for this turn before connecting or discovering models.
 
@@ -37,7 +43,7 @@ Use the user's language. When the account is known to be disconnected, a suitabl
 
 - Use OAuth managed by the current host's plugin connection. Never request an API key, token, cookie, authorization header, or credential file. Never log private account fields or signed URLs.
 - The host manages OAuth client registration and its metadata. Do not require the model or user to inject `client_name`, edit OAuth requests, or supply a client secret before starting the native sign-in flow. Report an actual registration failure through [troubleshooting](references/troubleshooting.md).
-- The native `.mcp.json` and portable `mcp.json` must both retain the same single China endpoint, `https://klingai.com/mcp/plugin`. Let the host load the appropriate package entry; do not register a second standalone Kling AI server or add a region-switching flow.
+- The native `.mcp.json` and portable `mcp.json` must both retain the same single China endpoint, `https://kling-ai.prt.kuaishou.com/mcp`. Let the host load the appropriate package entry; do not register a second standalone Kling AI server or add a region-switching flow.
 - Create one UUIDv7 `taskTraceId` for each unrelated new objective. Reuse it across discovery, upload, generation, and querying for the same objective. Present `generationId` to the user as the task ID; do not expose `taskTraceId` unless troubleshooting requires it.
 
 ## Model discovery

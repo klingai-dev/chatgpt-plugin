@@ -1,0 +1,9 @@
+{
+  "name": "chatgpt-plugin-checks",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test tests/*.test.mjs",
+    "test:routing": "node scripts/test-workflow-routing.mjs"
+  }
+}

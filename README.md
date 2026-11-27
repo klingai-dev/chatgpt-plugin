@@ -1,5 +1,8 @@
 # 在 ChatGPT 和 Codex 中使用可灵 AI（中国区）
 
+PRT branch `prt-cn` uses `https://kling-ai.prt.kuaishou.com/mcp`. Load this branch for PRT review; public marketplace installation instructions refer to the production release. Creative requests first discover the complete tool declarations and remote workflow catalog, including text-only plans. Search misses, truncated results and incomplete declarations pause routing instead of enabling local fallback.
+
+
 在对话里用可灵 AI 生成图片、编辑参考图、制作视频，并查询灵感值和生成进度。本分支 `cn` 使用中国区可灵账号。国际区账号请使用 [main 分支](https://github.com/klingai-dev/chatgpt-plugin/tree/main)。
 
 ## 选择接入方式
@@ -33,7 +36,7 @@ codex plugin add kling-ai@kling-ai
 ### ChatGPT 网页端
 
 1. 打开 [ChatGPT 插件页](https://chatgpt.com/plugins)，点击 **+ → 添加自定义 MCP 服务器**。是否能添加取决于账号和工作区设置。部分界面的入口为 **设置 → 插件 → 创建**。
-2. 名称填 `Kling AI`，服务器 URL 填 `https://klingai.com/mcp`，认证方式选 **OAuth**。
+2. 名称填 `Kling AI`，服务器 URL 填 `https://kling-ai.prt.kuaishou.com/mcp`，认证方式选 **OAuth**。
 3. 阅读页面提示并创建，使用中国区可灵账号完成授权。在新对话中通过 `@` 选择 **Kling AI**。[OpenAI 自定义 MCP 配置说明](https://developers.openai.com/plugins/deploy/connect-chatgpt#add-the-mcp-server)
 
 ## 检查连接并开始创作
@@ -55,6 +58,6 @@ codex plugin add kling-ai@kling-ai
 
 ## 开发
 
-本仓库包含插件清单、MCP 配置、技能和图标。插件通过 `https://klingai.com/mcp/plugin` 连接远程服务，本地无需启动服务或构建。
+本仓库包含插件清单、MCP 配置、技能和图标。插件通过 `https://kling-ai.prt.kuaishou.com/mcp` 连接远程服务，本地无需启动服务或构建。
 
 修改后请检查 JSON/YAML 语法、插件清单、技能引用和资源路径，并在目标客户端用只读请求验证账号授权。[维护说明](<plugins/Kling AI/README.md#connection-details-for-maintainers>)

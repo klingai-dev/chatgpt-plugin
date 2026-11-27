@@ -2,7 +2,7 @@
 
 ## Generation
 
-1. Follow the core skill's [connect and verify](../SKILL.md#first-step-connect-and-verify) flow. Use the current host's existing Kling AI connection at `https://klingai.com/mcp/plugin`, then read the current `tools/list`.
+1. Follow the core skill's [connect and verify](../SKILL.md#first-step-connect-and-verify) flow. Use the current host's existing Kling AI connection at `https://kling-ai.prt.kuaishou.com/mcp`, then read the current `tools/list`.
 2. Create or reuse the objective's UUIDv7 `taskTraceId`. Select a compatible pair through [model discovery](../SKILL.md#model-discovery). For video, apply the [video fit rules](omni-video.md).
 3. After selecting a pair, prepare reference roles. For generation or requested media preparation, upload required local media with `file_upload` and bind the returned URL under the live input name. Before submission, check the actual arguments and inputs using the [MCP contract](mcp-contract.md).
 4. Describe the final settings and apply the core [billing and authorization rules](../SKILL.md#billing-and-single-submission). End at the proposal when the user requested review.
