@@ -46,3 +46,18 @@ An unrelated objective starts a fresh route without erasing the previous objecti
 - Use the bundled workflow only when complete declarations from the configured connection confirm that `skill_catalog` is absent, or a successful catalog lookup returns no match, and the user did not explicitly require an official Skill. Missing or incomplete discovery evidence blocks automatic fallback. Do not switch endpoints or add a second connection to obtain a catalog.
 - If the user explicitly requires an official Skill and the tool/entry is unavailable, report the limitation. Do not silently substitute a bundled Skill.
 - If listing or reading fails, report the observed failure, preserve the request and assets, and stop before generation; do not treat failure as no match or silently fall back. If an active package or required file becomes unavailable, preserve progress and report the blocked step; do not silently fall back or resubmit work.
+
+## When routing is blocked
+
+For an ordinary creative request, send one short status paragraph. Fill the template in the user's language and end the reply after the recovery condition. The template is the entire routine blocked response. Do not append a rationale, citation, link to instructions, tool name, or raw error. Provide technical diagnostics only when asked. Say “No generation was submitted” only when no submission was attempted.
+
+> [Step] is paused because [plain-language cause]. I've kept [brief]. [Actual submission status]. We can continue here once [recovery condition].
+>
+> [当前步骤]暂时暂停，原因是[用户能理解的情况]。已保留[原需求要点]。[实际提交状态]。[恢复条件]后可在本对话继续。
+
+- If the host reports that sign-in is required, authorization expired, or renewal was rejected, explain the observed sign-in state. Point to the host's connection or reconnection action for this same Kling AI connector. After successful authorization, continue the original request when the complete tool list is available.
+- After confirmed authorization, if the host refreshed the same connector and the current chat still cannot use the creative catalog, explain that this chat has not loaded the renewed connection. When the host supports starting a new chat with the same connector, offer one copyable continuation of the retained brief. Keep using this chat if its tools are available.
+- If only tool discovery is incomplete, report that the complete list is unavailable. Missing tools alone do not establish a sign-in problem. Mention a refresh only when the host provides a relevant refresh action.
+- When a required workflow file is unavailable or returned a different version, explain that the workflow package could not finish loading. Resume this objective from the missing read when the originally selected package version is available again.
+- If a submission was attempted without a confirmed task ID, state that creation is unconfirmed, preserve the brief, and wait for the original submission status. A new chat or renewed authorization does not resolve the pending submission.
+- Keep the brief, confirmed settings, and assets available for continuation in this chat. Avoid asking the user to repeat details you already have.
