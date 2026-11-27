@@ -9,6 +9,9 @@ export const discoveryLimits = {
   "tools-truncated": "The host's tool search result was truncated; no complete declarations were obtained.",
   "tools-incomplete": "The host supplied incomplete tool declarations; remaining declarations are unavailable.",
   "tools-discovery-failure": "The host failed to retrieve the complete tool declarations.",
+  "tools-oauth-expired": "The native host confirmed that the China Kling AI connection could not renew authorization and offers a Reconnect action for that same connector.",
+  "tools-oauth-required": "The native host confirmed that the Global Kling AI connection is not signed in and offers a Connect action for that same connector.",
+  "tools-stale-chat": "The native host confirmed authorization succeeded and refreshed the same Kling AI connection. This chat still cannot use the catalog. The host can load the same connector in a new chat.",
 };
 const generations = ["text_to_image", "image_to_image", "text_to_video", "image_to_video", "omni_ref_video", "motion_control"];
 const schema = (properties = {}) => ({ type: "object", properties, additionalProperties: true });
@@ -63,7 +66,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href &
     const hideCatalog = paged || ["catalog-absent", "absent-text"].includes(scenario) || Object.hasOwn(discoveryLimits, scenario);
     result = paged && cursor === "catalog-page"
       ? { tools: tools.filter(tool => tool.name === "skill_catalog") }
-      : { tools: hideCatalog ? tools.filter(tool => tool.name !== "skill_catalog") : tools, ...(paged ? { nextCursor: "catalog-page" } : {}) };
+      : { tools: (scenario?.startsWith("tools-oauth-") || scenario === "tools-stale-chat") ? [] : hideCatalog ? tools.filter(tool => tool.name !== "skill_catalog") : tools, ...(paged ? { nextCursor: "catalog-page" } : {}) };
     appendFileSync(trace, JSON.stringify({ method: "tools/list", cursor, nextCursor: result.nextCursor, hasCatalog: result.tools.some(tool => tool.name === "skill_catalog") }) + "\n");
   }
   else if (request.method === "tools/call") {

@@ -39,7 +39,11 @@ const partialContext = `Trusted prior task context: Active route remote, selecte
 const cases = [
   ...Object.entries(discoveryLimits).map(([id, limitation]) => ({
     id, discoveryLimited: true, noGeneration: true,
-    prompt: "参考商品图做一条20–30秒信息流广告，设计不同人群的开场钩子，先出方案。",
+    authorizationRequired: id.startsWith("tools-oauth-"),
+    staleChat: id === "tools-stale-chat",
+    prompt: id === "tools-oauth-required"
+      ? "Draft a text-only 20–30 second product ad plan using the product photo, with different hooks for different audiences."
+      : "参考商品图做一条20–30秒信息流广告，设计不同人群的开场钩子，先出方案。",
     context: `Trusted host discovery state: ${limitation} The tools exposed to this turn are only a partial set, not the configured connection's complete declarations. Complete declarations cannot be retrieved this turn.`,
   })),
   { id: "short-drama", prompt: `用可灵制作一段夜市短剧：${prompt}${approved}`, workflow: "fixture-cinema-27" },
@@ -154,7 +158,29 @@ for (const c of cases.filter(c => selected === "all" || selectedCases.includes(c
       const loaded = calls.findIndex(call => call.name === "skill_catalog" && call.args.id === c.workflow && !call.args.path);
       assert.ok(listed >= 0 && loaded > listed, "A new objective matched by intent before listing the live workflow catalog");
     }
-    if (c.discoveryLimited || paginationUnavailable) assert.match(answer, /完整|分页|截断|complet|paginat|truncat/i, "Discovery-limited routing did not report the limitation");
+    if (c.discoveryLimited || paginationUnavailable || c.fileVersionMismatch) {
+      assert.match(answer, /(?:没有|未)(?:(?:发起|提交|开始|触发)[^。\n]{0,12})?生成|no generation (?:was |has been )?(?:submitted|started)|did not (?:submit|start) (?:a |any )?generation/i, "Blocked reply did not report submission status");
+      assert.match(answer, c.discoveryLimited ? /广告|advertis(?:ement|ing)|\b(?:product )?ads?\b/i : /夜市|night market/i, "Blocked reply lost the user's brief");
+      assert.match(answer, /继续|续做|恢复|resume|continue/i, "Blocked reply did not explain how work can resume");
+      assert.doesNotMatch(answer, /(?:SKILL|workflow-routing)\.md|[\w_-]+\/references\/|tools\/list|nextCursor|skill_catalog/i, "Blocked reply disclosed internal routing details");
+      if (c.fileVersionMismatch) assert.match(answer, /版本[^。\n]{0,25}(?:一致|同步|匹配)|(?:一致|同步|匹配)[^。\n]{0,25}版本|同一版本|原[^。\n]{0,12}版本[^。\n]{0,25}恢复|same version|matching version|original version|in sync/i, "Blocked reply did not explain the version recovery condition");
+      else if (c.staleChat) {
+        assert.match(answer, /新(?:开|建)?对话|新聊天|new chat/i, "Blocked reply did not offer the observed new-chat recovery");
+        assert.match(answer, /20[^。\n]{0,4}30[^。\n]{0,8}秒|product photo/i, "Blocked reply lost original continuation details");
+        assert.doesNotMatch(answer, /请[^。\n]{0,20}(?:重新(?:授权|登录|连接)|重连)|(?:please )?(?:reconnect|sign in again)/i, "Blocked reply asked for redundant authorization");
+      } else if (c.authorizationRequired) {
+        assert.match(answer, c.id === "tools-oauth-expired" ? /重新(?:授权|连接|登录)|重连|reconnect|reauthoriz/i : /登录|连接|sign[ -]?in|connect/i, "Blocked reply did not tell the user how to reconnect the observed connector");
+        assert.match(answer, /可灵|kling ai/i, "Blocked reply did not identify the configured connector");
+        assert.doesNotMatch(answer, /invalid_grant|https?:\/\//i, "Blocked reply included a raw authorization error or URL");
+      } else {
+        assert.match(answer, /完整|列全|全量|complet|full tool list/i, "Blocked reply did not explain the tool-list recovery condition");
+        assert.doesNotMatch(answer, /请[^。\n]{0,15}(?:重新登录|重新授权|重连)|please (?:sign in|reconnect|reauthorize)/i, "Incomplete discovery alone is not evidence for reauthorization");
+      }
+    }
+    if (c.id === "resume-direct-ambiguous") {
+      assert.match(answer, /未知|不确定|未确认|无法确认|unknown|unclear|unconfirmed|cannot confirm/i, "Reply did not preserve uncertainty about the original submission");
+      assert.doesNotMatch(answer, /(?:没有|未)(?:提交|生成|发起)(?:任何|新)?(?:生成|任务)|no generation (?:was |has been )?(?:submitted|started)|did not submit/i, "Reply treated the original submission as unsent");
+    }
     if (c.expectedText) assert.ok(answer.includes(c.expectedText), "Direct text execution changed the original prompt");
     validate(paginationUnavailable ? { ...c, discoveryLimited: true } : c, calls, events, { cwd: workspace, skillRoots: [join(plugin, "skills"), join(workspace, ".agents/skills")], skillNames: readdirSync(join(plugin, "skills")) });
     if (paginationUnavailable) hostLimitations++;
