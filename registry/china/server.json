@@ -8,7 +8,7 @@
   "remotes": [
     {
       "type": "streamable-http",
-      "url": "https://klingai.com/mcp/plugin"
+      "url": "https://kling-ai.prt.kuaishou.com/mcp"
     }
   ],
   "_meta": {

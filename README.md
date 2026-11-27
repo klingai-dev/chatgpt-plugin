@@ -1,5 +1,8 @@
 # Kling AI for ChatGPT and Codex
 
+PRT branch `prt-global` uses `https://kling-ai-sgp.prt.kuaishou.com/mcp`. Load this branch for PRT review; public marketplace installation instructions refer to the production release. Creative requests first discover the complete tool declarations and remote workflow catalog, including text-only plans. Search misses, truncated results and incomplete declarations pause routing instead of enabling local fallback.
+
+
 Generate images, edit reference images, create videos, and check credits and task progress from your chat. This branch (`main`) uses Kling AI Global accounts. For a China-region account, use the [`cn` branch](https://github.com/klingai-dev/chatgpt-plugin/tree/cn).
 
 ## Choose how to connect
@@ -33,7 +36,7 @@ After installation, follow Codex's connection prompt to authorize your Kling AI 
 ### ChatGPT on the web
 
 1. Open [ChatGPT Plugins](https://chatgpt.com/plugins), select **+**, then **Add custom MCP server**. Availability depends on your account and workspace settings. In some versions, the entry is under **Settings → Plugins → Create**.
-2. Name it `Kling AI`, enter `https://kling.ai/mcp` as the server URL, and select **OAuth**.
+2. Name it `Kling AI`, enter `https://kling-ai-sgp.prt.kuaishou.com/mcp` as the server URL, and select **OAuth**.
 3. Review the prompt, create the plugin, and authorize your Kling AI Global account. In a new chat, use `@` to select **Kling AI**. [OpenAI custom MCP setup](https://developers.openai.com/plugins/deploy/connect-chatgpt#add-the-mcp-server)
 
 ## Check the connection and start creating
@@ -55,6 +58,6 @@ If the plugin is connected but its tools are missing, refresh the app or open a 
 
 ## Development
 
-This repository contains plugin manifests, MCP connection settings, skills, and icons. The plugin connects to the remote service at `https://kling.ai/mcp/plugin` and runs without a local server or build step.
+This repository contains plugin manifests, MCP connection settings, skills, and icons. The plugin connects to the remote service at `https://kling-ai-sgp.prt.kuaishou.com/mcp` and runs without a local server or build step.
 
 After editing, check JSON and YAML syntax, matching manifest metadata, skill references, and asset paths. Verify account authorization in the intended client with a read-only connection check. [Maintainer notes](<plugins/Kling AI/README.md#connection-details-for-maintainers>)

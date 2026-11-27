@@ -22,12 +22,12 @@ jobs:
             file: server.json
             name: io.github.klingai-dev/kling-ai
             version: 1.0.1
-            endpoint: https://kling.ai/mcp/plugin
+            endpoint: https://kling-ai-sgp.prt.kuaishou.com/mcp
           - region: china
             file: registry/china/server.json
             name: io.github.klingai-dev/kling-ai-cn
             version: 1.0.0
-            endpoint: https://klingai.com/mcp/plugin
+            endpoint: https://kling-ai.prt.kuaishou.com/mcp
     runs-on: ubuntu-latest
     permissions:
       contents: read
